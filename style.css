@@ -1,0 +1,65 @@
+*{
+    font-family: 'Ubuntu Mono', 'Source Code Pro', monospace;
+}
+body {
+    background-color: rgb(19, 19, 27);
+    color: white;
+    width: 100%;
+}
+#nav{
+    background-color: rgb(0, 155, 212);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border:solid 2px white;
+}
+#home,#about,#projects,#contact,#name_box{
+    background-color:rgb(19, 19, 27); 
+    color: white;
+    padding: 10px;
+    border:solid 2px white;
+    border-radius: 15px;
+}
+#home:hover,#about:hover,#projects:hover,#contact:hover{
+    background-color:rgb(255, 255, 255); 
+    color: rgb(19, 19, 27);
+    padding: 10px;
+    border:solid 2px rgb(19, 19, 27);
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#container {
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+
+}
+#intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 50%;
+    margin: 20px;
+    font-size: larger;
+}
+#pic{
+    width: 50%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    height: 90vh;
+    margin: 20px;
+}
+#picture{
+    background-image: url('Pic.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 90vh;
+    padding: 10px;
+    background-position: center;
+}
