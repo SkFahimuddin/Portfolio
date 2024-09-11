@@ -13,6 +13,7 @@ body {
     align-items: center;
     padding: 5px;
     height: 10vh;
+    
 }
 #nav_buttons{
     margin-right: 50px;
@@ -111,18 +112,10 @@ h1{
     justify-content: space-evenly;
     align-items: center;
     border: 5px solid transparent;
-    margin: 5px;
     width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
     
-    
-}
-#box_div{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: rgb(208, 223, 226);
-    width: 90%;
-    border-radius: 15px;
 }
 #AI,#web_dev,#ui_ux{
     background-color: rgb(19, 19, 27);
@@ -130,9 +123,45 @@ h1{
     width: 35vh;
     margin-top: 50px;
     margin-bottom: 50px;
-    border: 2px solid rgb(255, 255, 255); 
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 25px;
     display: table-column;
     justify-content: center;
     text-align: center;
     min-height: 60vh;
+    box-shadow: 0px 0px 15px rgb(255, 255, 255,0.5)
+}
+#about_block{
+    display: flex;
+    justify-content: center;
+}
+#about_div{
+    width: 90%;
+    height:100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border:10px solid white;
+    border-radius: 50px;
+}
+#about_pic{ 
+    background-image: url('about.png');
+    width: 50%;
+    height: 60vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+#about_info{
+    width: 50%;
+    display: table-column;
+    justify-content:center;
+    align-items: start;
+    padding: 100px;
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 60vh;
+    overflow-y: scroll; overflow-x: hidden;
+    
 }
