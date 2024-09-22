@@ -74,7 +74,6 @@ h1{
     background-position: center;
 }
 #social_bar{
-    width: 100%;
     height:8vh;
     background-color:rgb(0, 155, 212); 
     display: flex;
@@ -201,4 +200,47 @@ h1{
     justify-content: center;
     text-align: center;
     box-shadow: 0px 0px 15px rgb(255, 255, 255,0.5)
+}
+#projects_div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+}
+#pro_div{
+    width: 100%;
+    text-align: center;
+}
+#project_otto,#project_jarvis,#project_pagepallet,#project_fittech{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: end;
+}
+#project_jarvis,#project_fittech{
+    justify-content: start;
+
+}
+#pro_ottodiv,#pro_jarvisdiv,#pro_pagepalletdiv,#pro_fittechdiv{
+    width: 80%;
+    height: auto;
+    margin: 15px;
+    border: 5px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#pro_ottoimg{
+    background-color: aqua;
+    height: 90%;
+    width: 30%;
+    color: rgb(0, 45, 30);
+}
+#pro_ottoinfo{
+    width: 65%;
+    height: 90%;
+    background-color: rgb(210, 98, 98);
+    color: rgb(12, 33, 26);
+
 }
