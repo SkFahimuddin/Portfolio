@@ -114,7 +114,7 @@ h1{
     border: 5px solid transparent;
     margin-top: 50px;
     margin-bottom: 50px;
-    
+
 }
 #AI,#web_dev,#ui_ux{
     background-color: rgb(19, 19, 27);
@@ -129,7 +129,7 @@ h1{
     justify-content: center;
     text-align: center;
     min-height: 60vh;
-    box-shadow: 0px 0px 15px rgb(255, 255, 255,0.5)
+    box-shadow: 0px 0px 15px rgb(255, 255, 255,0.5);
 }
 #about_block{
     display: flex;
@@ -232,14 +232,35 @@ h1{
     align-items: center;
 }
 #pro_ottoimg,#pro_jarvisimg,#pro_pagepalletimg,#pro_fittechimg{
-    background-color: aqua;
     height: 90%;
     width: 30%;
-    color: rgb(0, 45, 30);
+    color: rgb(255, 255, 255);
+    border: 2px solid white;
+    border-radius: 15px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#pro_ottoimg{
+    background-image: url('otto.webp');
+}
+#pro_jarvisimg{
+    background-image: url('Jarvisimg.jpg');
+}
+#pro_pagepalletimg{
+    background-image: url('pagepallete.jpg');
+    background-size: cover;
+}
+#pro_fittechimg{
+    background-image: url('fit-tech.jpg');
+    background-size: cover;
 }
 #pro_ottoinfo,#pro_jarvisinfo,#pro_pagepalletinfo,#pro_fittechinfo{
     width: 65%;
     height: 90%;
-    background-color: rgb(210, 98, 98);
-    color: rgb(12, 33, 26);
+    background-color: transparent;
+    color: rgb(0, 155, 212);
+    border: 2px solid white;
+    border-radius: 15px;
+    overflow: hidden;
 }
