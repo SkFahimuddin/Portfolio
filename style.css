@@ -16,20 +16,17 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
-    height: 10vh;
-    
+    padding: 15px;
+    border-bottom: 2px solid white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 1000;
 }
 #nav_buttons{
     margin-right: 50px;
 }
-.nav {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%; /* Ensures the navbar spans the full width of the screen */
-    z-index: 1000; /* Makes sure it appears above other elements */
-  }
 #home,#about,#projects,#contact,#name_box{
     background-color:rgb(19, 19, 27); 
     color: white;
@@ -50,6 +47,7 @@ a{
 }
 #container {
     width: 100%;
+    height: 100vh;
     display: flex;
     justify-content:space-around;
     align-items: center;
@@ -105,14 +103,14 @@ h1{
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
-    height: 90vh;
+    height: 85vh;
     padding: 10px;
     background-position: center;
 }
 #social_bar{
-    height:8vh;
     background-color:rgb(0, 155, 212); 
     display: flex;
+    padding: 5px;
     justify-content: space-evenly;
     align-items: center;
     border: 2px solid white;
@@ -178,7 +176,7 @@ h1{
     justify-content: center;
     border:10px solid white;
     border-radius: 50px;
-    margin-top: 15vh;
+    margin-top: 10vh;
 }
 #about_det{
     width: 100%;
@@ -247,7 +245,7 @@ h1{
 #pro_div{
     width: 100%;
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 8vh;
 }
 #project_otto,#project_jarvis,#project_pagepallet,#project_fittech{
     width: 100%;
