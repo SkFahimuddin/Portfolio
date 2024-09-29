@@ -84,3 +84,45 @@ for (let i = 0; i < submitButtons.length; i++) {
         site_wide_cursor.querySelector('.pointer').style.backgroundColor = 'white';
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const aboutPic = document.getElementById('about_pic');
+    const aboutInfo = document.getElementById('about_info');
+    const projectOtto = document.getElementById('project_otto');
+    const projectJarvis = document.getElementById('project_jarvis');
+    const projectPagepallet = document.getElementById('project_pagepallet');
+    const projectFittech = document.getElementById('project_fittech');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target === aboutPic) {
+                    aboutPic.classList.add('visible'); // Show about_pic
+                }
+                if (entry.target === aboutInfo) {
+                    aboutInfo.classList.add('visible'); // Show about_info
+                }
+                if (entry.target === projectOtto) {
+                    projectOtto.classList.add('visible'); // Show about_pic
+                }
+                if (entry.target === projectOtto) {
+                    projectJarvis.classList.add('visible'); // Show about_pic
+                }
+                if (entry.target === projectOtto) {
+                    projectPagepallet.classList.add('visible'); // Show about_pic
+                }
+                if (entry.target === projectOtto) {
+                    projectFittech.classList.add('visible'); // Show about_pic
+                }
+                observer.unobserve(entry.target); // Stop observing once it's visible
+            }
+        });
+    });
+
+    observer.observe(aboutPic); // Start observing the about_pic div
+    observer.observe(aboutInfo);
+    observer.observe(projectJarvis);
+    observer.observe(projectPagepallet);
+    observer.observe(projectOtto);
+    observer.observe(projectFittech); // Start observing the about_info div
+});
