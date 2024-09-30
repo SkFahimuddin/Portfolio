@@ -67,6 +67,25 @@ a{
 h1{
     font-size: 65px;
 }
+.cursor {
+    display: inline-block;
+    width: 1px;
+    background-color: black;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 #res{
     background-color:rgb(19, 19, 27);
     color: white;

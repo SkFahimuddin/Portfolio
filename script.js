@@ -126,3 +126,54 @@ document.addEventListener('DOMContentLoaded', function () {
     observer.observe(projectOtto);
     observer.observe(projectFittech); // Start observing the about_info div
 });
+
+
+const roles = [
+    "Web Developer",
+    "UI/UX Designer",
+    "Artificial Intelligence Engineer"
+];
+
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let delay = 200;  // Typing delay
+
+function typeRole() {
+    const currentRole = roles[roleIndex];
+    const roleSpan = document.getElementById("role");
+    const staticLetter = document.getElementById("static-letter");
+
+    // Typing or deleting effect
+    if (isDeleting) {
+        roleSpan.textContent = currentRole.substring(0, charIndex);
+        charIndex--;
+    } else {
+        roleSpan.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    // Check if the current role is "Artificial Intelligence Engineer"
+    if (currentRole === "Artificial Intelligence Engineer") {
+        staticLetter.textContent = "An";  // Change "A" to "An"
+    } else {
+        staticLetter.textContent = "A";  // Keep it as "A" for other roles
+    }
+
+    // Change delay for typing/deleting effect
+    if (!isDeleting && charIndex === currentRole.length) {
+        delay = 1000;  // Pause at the end of the word
+        isDeleting = true;  // Start deleting after pause
+    } else if (isDeleting && charIndex === 0) {
+        delay = 500;  // Short pause before typing the next word
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;  // Move to next word
+    } else {
+        delay = isDeleting ? 100 : 200;  // Adjust speed
+    }
+
+    setTimeout(typeRole, delay);
+}
+
+// Start the typing effect when the page loads
+document.addEventListener("DOMContentLoaded", typeRole);
