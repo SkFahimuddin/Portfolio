@@ -48,7 +48,7 @@ a{
 }
 #container {
     width: 100%;
-    height: 110vh;
+    height: 100vh;
     display: flex;
     justify-content:space-around;
     align-items: center;
@@ -62,11 +62,10 @@ a{
     height: 90vh;
     width: 50%;
     margin: 20px;
-    margin-left: 100px;
     font-size: larger;
 }
 h1{
-    font-size: 60px;
+    font-size: 65px;
 }
 #res{
     background-color:rgb(19, 19, 27);
@@ -469,50 +468,4 @@ textarea {
 
 .black-bg {
     background-color: black;
-}
-
-
-
-.h11 {
-    font-size: 60px;
-    display: flex;
-    gap: 2px; 
-}
-
-.h11 span {
-    color: rgb(0, 155, 212);
-    text-shadow: 1px 0 0 white, -1px 0 0 white, 0 1px 0 white, 0 -1px 0 white;
-    opacity: 0;
-    animation: fadeInOut 1s forwards;
-    animation-iteration-count: infinite; 
-}
-@keyframes fadeInOut {
-    0%{ opacity: 1; } 
-    20%{ opacity: 1; }
-    40%{opacity: 1;}
-    50%{opacity: 1;}
-    55%{opacity: 1;}
-    60%{opacity: 1;} 
-    80% { opacity: 0; } 
-    100% { opacity: 0; } 
-}
-.h11 span:nth-child(1) { animation-delay:none; }
-
-.h11 span:nth-child(2) { animation-delay: 0.25s; }
-.h11 span:nth-child(3) { animation-delay: 0.5s; }
-.h11 span:nth-child(4) { animation-delay: 0.75s; }
-.h11 span:nth-child(5) { animation-delay: 1s; }
-.h11 span:nth-child(6) { animation-delay: 1.25s; }
-.h11 span:nth-child(7) { animation-delay: 1.5s; }
-.h11 span:nth-child(8) { animation-delay: 1.75s; }
-.h11 span:nth-child(9) { animation-delay: 2s; }
-.h11 span:nth-child(10) { animation-delay: 2.25s; }
-.h11 span:nth-child(11) { animation-delay: 2.5s; }
-.h11 span:nth-child(12) { animation-delay: 2.75s; }
-.h11 span:nth-child(13) { animation-delay: 3s; }
-.h11 span:nth-child(14) { animation-delay: 3.25s; }
-
-.h11 span {
-    animation-duration: 5.5s;
-    animation-fill-mode: backwards; 
 }
