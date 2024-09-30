@@ -118,7 +118,7 @@ h1{
     border-radius: 15px;
     
 }
-#email,#github,#X,#insta
+#linkedin,#github,#X,#insta
 {
     background-color:rgb(19, 19, 27); 
     color: white;
@@ -129,7 +129,7 @@ h1{
     width: 55px;
     border: 2px solid white;
 }
-#email:hover,#github:hover,#X:hover,#insta:hover
+#linkedin:hover,#github:hover,#X:hover,#insta:hover
 {
     background-color: white;
     color: rgb(19, 19, 27);;
@@ -308,7 +308,77 @@ h1{
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+
+    transition: height 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
 }
+
+#pro_ottoimg:hover,#pro_jarvisimg:hover,#pro_pagepalletimg:hover,#pro_fittechimg:hover{
+    background-color: rgb(255, 255, 255);
+    height: 120%;
+}
+#pro_jarvisimg:hover{
+    background-color: black;
+}
+.btn{
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    color: white;
+    border: none;
+    font-size: 14px;
+    cursor: none;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 30px;
+}
+.ottobtn{
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    color: white;
+    border: none;
+    font-size: 14px;
+    cursor: none;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 30px;
+}
+#pro_ottoimg:hover .ottobtn,#pro_pagepalletimg:hover .btn,#pro_jarvisimg:hover .btn,#pro_fittechimg:hover .btn{
+    display: inline-block;
+}
+.ottobtn:first-child{
+    bottom: 20px;
+}
+.btn:first-child   {
+    bottom: 20px;
+    left: 100px;
+}
+.btn:last-child{
+    bottom: 20px;
+    right: 100px;
+}
+.ottobtn:hover{
+    background-color: white;
+    color: black;
+    border-color:black;
+}
+.btn:hover{
+    background-color: white;
+    color: black;
+    border-color:black;
+}
+
 #pro_ottoimg{
     background-image: url('otto.webp');
 }
