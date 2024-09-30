@@ -177,36 +177,47 @@
                 <p>Phone: +91 7980909123</p>
             </div>
 
+            
             <div class="form-container" id="form-container">
-                <form action="#" method="post">
+                <form id="contact-form">
                     <div class="form-group" id="form-group">
                         <label for="first-name">First Name <span class="required">*</span></label>
                         <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
                     </div>
-
+            
                     <div class="form-group half-right">
                         <label for="last-name">Last Name <span class="required">*</span></label>
                         <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
                     </div>
-
+            
                     <div class="form-group">
                         <label for="email">Email <span class="required">*</span></label>
                         <input type="email" id="con_email" name="email" placeholder="example@mygmail.com" required>
                     </div>
-
+            
                     <div class="form-group half-right">
                         <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone" placeholder="Enter your phone number" >
+                        <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
                     </div>
-
+            
                     <div class="form-group" style="width: 100%;">
                         <label for="message">Leave us a message...<span class="required">*</span></label>
                         <textarea id="message" name="message" placeholder="Your message" required></textarea>
                     </div>
-
+            
                     <input type="submit" value="Submit">
                 </form>
+            
+                <div id="status"></div>
             </div>
+            
+            <!-- Add the EmailJS SDK -->
+            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+            <script>
+                (function(){
+                    emailjs.init("t5V8Jgt0na69vaVW7"); // Replace with your EmailJS public key
+                })();
+            </script>
         </div>
     </div>
     <div style="width: 100%;height: 5vh;background-color:  rgb(0, 155, 212);border-top: solid 2px white;color: rgb(19, 19, 27);text-align: center;font-size: 30px;font-weight: bold;"><span>Thank You</span></div>

@@ -177,3 +177,31 @@ function typeRole() {
 
 // Start the typing effect when the page loads
 document.addEventListener("DOMContentLoaded", typeRole);
+
+
+
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Collect form data
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('con_email').value;
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+
+    // Send email using EmailJS
+    emailjs.send("service_zypq8jp", "template_vbzcz38", {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        phone: phone,
+        message: message
+    })
+    .then(function(response) {
+        document.getElementById('status').innerHTML = "Message sent successfully!";
+    }, function(error) {
+        document.getElementById('status').innerHTML = "Failed to send message.";
+    });
+});
