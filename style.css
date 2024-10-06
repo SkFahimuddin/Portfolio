@@ -288,6 +288,13 @@ h1{
     text-align: center;
     box-shadow: 0px 0px 15px rgb(255, 255, 255,0.5)
 }
+.pro_heading{
+    font-size: 50px;
+    border: 5px solid rgb(0, 155, 212);
+    border-radius: 15px;
+    padding: 5px;
+
+}
 #projects_div{
     width: 100%;
     display: flex;
@@ -446,6 +453,12 @@ h1{
     display: flex;
     justify-content: space-between;
 }
+.contact-info h1{
+    margin-top:0 ;
+    color: rgb(0, 155, 212);
+    font-size: 70px;
+    margin-bottom: 50px;
+}
 
 .contact-info {
     width: 40%;
@@ -575,6 +588,18 @@ textarea {
 
 
 @media only screen and (max-width :600px){
+
+    .custom-cursor{
+        display: none;
+    }
+    .site-wide{
+        display: none;
+    }
+    .pointer {
+        display: none;
+    }
+
+
     .nav{
         justify-content: space-between;
         height: 8vh;
@@ -691,6 +716,99 @@ textarea {
     #edu_info{
         min-height: 0;
     }
+
+    .pro_heading
+    {
+        font-size: 25px;
+    }
+    #project_otto,#project_jarvis,#project_pagepallet,#project_fittech{
+        height: 20vh;
+    }
+    #pro_ottoinfo,#pro_jarvisinfo,#pro_pagepalletinfo,#pro_fittechinfo{
+        font-size: 10px;
+        overflow-y: scroll; overflow-x: hidden;
+    }
+
+    .ottobtn{
+        display: flex;
+        position: absolute;
+        background-color: #000000;
+        color: white;
+        border: none;
+        font-size: 12px;
+        cursor: none;
+        transition: all 0.3s ease;
+        width: 20px;
+        height: 20px;
+        border: 2px solid white;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+    .ottobtn:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #pro_ottoimg:hover,#pro_jarvisimg:hover,#pro_pagepalletimg:hover,#pro_fittechimg:hover{
+        height: 90%;
+        background-color: transparent;
+    }
+    .ottobtn:first-child{
+        bottom: 15px;
+    }
+
+    .btn{
+        display: flex;
+        position: absolute;
+        background-color: #000000;
+        color: white;
+        border: none;
+        font-size: 12px;
+        cursor: none;
+        transition: all 0.3s ease;
+        width: 20px;
+        height: 20px;
+        border: 2px solid white;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn:first-child   {
+        bottom: 10px;
+        left: 80px;
+    }
+    .btn:last-child{
+        bottom: 10px;
+        right: 80px;
+    }
+    .contact-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contact-info p{
+        display: none;
+    }
+    .contact-info h1{
+        font-size: 40px;
+    }
+    .form-container {
+        width: 90%;
+    }
+    input[type="text"]::placeholder,input[type="email"]::placeholder,textarea::placeholder {
+        font-size: 13px;
+    }
+    input[type="submit"]{
+        height: 20px;
+        width: 50px;
+        font-size: 10px;
+        padding: 0;
+    }
+
+
+
 
 
 }
