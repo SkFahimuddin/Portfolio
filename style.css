@@ -28,6 +28,11 @@ a{
 #nav_buttons{
     margin-right: 50px;
 }
+
+.nav_phone{
+    display: none;
+}
+
 #home,#about,#projects,#contact,#name_box{
     background-color:rgb(19, 19, 27); 
     color: white;
@@ -48,10 +53,11 @@ a{
 }
 #container {
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content:space-around;
     align-items: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 
 }
 #intro{
@@ -557,4 +563,91 @@ textarea {
 
 .black-bg {
     background-color: black;
+}
+
+
+
+
+
+@media only screen and (max-width :600px){
+    .nav{
+        justify-content: space-between;
+        height: 8vh;
+
+    }
+
+    .nav a{
+        display: none;
+    }
+    #nav_buttons{
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+    } 
+    
+    .nav_phone{
+        display: block;
+        background-color: transparent;
+        color:white;
+        height:9vh;
+        width: 100%;
+        display: flex;
+        justify-content:space-evenly;
+        align-items: center;
+    }
+
+    .nav_phone a{
+        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        background-color: rgb(19, 19, 27);
+        color:white;
+        border:solid 2px white;
+        border-radius: 15px;
+        height: 2.5vh;
+        width: 2.5vh;
+    }
+    .nav_phone a:hover{
+        background-color: white;
+        border: 2px solid  rgb(19, 19, 27) ;
+        color: rgb(19, 19, 27);
+    }
+    #name_box{
+        font-size: 15px;
+    }
+
+    .container{
+        flex-direction: column-reverse;
+        margin: 0;
+    }
+    #pic{
+        width: 100%;
+        margin: 0;
+    }
+    #intro{
+        width: 80%;
+        justify-content: start;
+    }
+    #linkedin,#github,#X,#insta
+    {
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    }
+    #linkedin:hover,#github:hover,#X:hover,#insta:hover
+    {
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    color: rgb(19, 19, 27);
+    border: 2px solid rgb(19, 19, 27);
+    cursor: none;
+    }
+
+
 }
