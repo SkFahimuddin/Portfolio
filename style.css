@@ -240,6 +240,7 @@ h1{
     max-height: 60vh;
     overflow-y: scroll; overflow-x: hidden;
     scrollbar-width: 5px;
+    font-size: large;
 }
 .about_info {
     opacity: 0; /* Initially hidden */
@@ -263,11 +264,15 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 50px;
 }
 #edu_info{
     min-height: 70vh;
     display: flex;
     justify-content: space-around;
+}
+.edu_tag{
+    font-size: 25px;
 }
 #edu_10,#edu_12,#edu_btech{
     background-color: rgb(19, 19, 27);
@@ -647,6 +652,43 @@ textarea {
     color: rgb(19, 19, 27);
     border: 2px solid rgb(19, 19, 27);
     cursor: none;
+    }
+
+
+    #AI,#web_dev,#ui_ux{
+        min-height: 40vh;
+        font-size: 10px;
+        margin-bottom: 0;
+    }
+
+
+    #about_det{
+        flex-direction: column;
+    }
+    #about_pic{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #about_info{
+        width: 80%;
+        font-size: 10px;
+        margin-bottom: 10vh;
+
+    }
+    #about_line{
+        font-size: 30px;
+        height: 5vh;
+    }
+    .edu_tag{
+        font-size: 10px;
+    }
+    #edu_10,#edu_12,#edu_btech{
+        font-size: 10px;
+        height: 25vh;
+        width: 25%;
+    }
+    #edu_info{
+        min-height: 0;
     }
 
 
