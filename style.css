@@ -671,8 +671,9 @@ textarea {
     }
     #about_info{
         width: 80%;
-        font-size: 10px;
+        font-size: 15px;
         margin-bottom: 10vh;
+        padding: 0;
 
     }
     #about_line{
