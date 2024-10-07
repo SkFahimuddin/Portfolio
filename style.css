@@ -744,8 +744,8 @@ textarea {
         font-size: 12px;
         cursor: none;
         transition: all 0.3s ease;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border: 2px solid white;
         border-radius: 50%;
         justify-content: center;
@@ -773,8 +773,8 @@ textarea {
         font-size: 12px;
         cursor: none;
         transition: all 0.3s ease;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border: 2px solid white;
         border-radius: 50%;
         justify-content: center;
