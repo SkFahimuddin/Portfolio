@@ -681,12 +681,11 @@ textarea {
 
 
     #AI,#web_dev,#ui_ux{
-        min-height: 40vh;
+        height: 30vh;
         font-size: 10px;
         margin-bottom: 0;
         overflow-x: hidden;
         overflow-y: scroll;
-        max-height: 50vh;
     }
 
 
