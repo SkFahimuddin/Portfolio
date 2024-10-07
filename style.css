@@ -614,11 +614,12 @@ textarea {
         display: none;
     }
     #nav_buttons{
-        width: 40%;
+        width: 50%;
         display: flex;
         justify-content: center;
         text-align: center;
         margin: 0;
+        padding: 0;
     } 
     
     .nav_phone{
