@@ -684,6 +684,9 @@ textarea {
         min-height: 40vh;
         font-size: 10px;
         margin-bottom: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-height: 50vh;
     }
 
 
