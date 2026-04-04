@@ -1,235 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio </title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sk Fahimuddin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous"/>
+<style>
+:root{
+  --bg:#000005;
+  --c1:#00ffcc;
+  --c2:#ff2d78;
+  --c3:#7000ff;
+  --white:#ffffff;
+  --dim:#1a1a2e;
+  --muted:#555577;
+  --ff-head:'Bebas Neue',sans-serif;
+  --ff-body:'DM Sans',sans-serif;
+  --ff-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--ff-body);overflow-x:hidden;cursor:none;}
+a{text-decoration:none;color:inherit;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--c1);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s;}
+#cur2{position:fixed;width:42px;height:42px;border:1px solid rgba(0,255,204,.35);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .2s;}
+body:has(a:hover) #cur,body:has(button:hover) #cur{width:5px;height:5px;}
+body:has(a:hover) #cur2,body:has(button:hover) #cur2{width:60px;height:60px;border-color:var(--c2);}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:99990;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;transition:opacity .9s;}
+#loader.done{opacity:0;pointer-events:none;}
+.ld-name{font-family:var(--ff-head);font-size:clamp(70px,12vw,160px);letter-spacing:10px;color:transparent;-webkit-text-stroke:1px var(--c1);position:relative;overflow:hidden;}
+.ld-name::after{content:attr(data-t);position:absolute;inset:0;color:var(--c1);clip-path:inset(100% 0 0 0);animation:ldRev 1.6s cubic-bezier(.77,0,.18,1) .3s forwards;}
+@keyframes ldRev{to{clip-path:inset(0 0 0 0);}}
+.ld-bar{width:clamp(280px,50vw,500px);height:2px;background:rgba(0,255,204,.15);overflow:hidden;}
+.ld-fill{height:100%;background:linear-gradient(90deg,var(--c3),var(--c1),var(--c2));width:0;animation:ldFill 1.9s ease forwards;}
+@keyframes ldFill{to{width:100%;}}
+
+/* CANVAS */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:22px 60px;background:linear-gradient(to bottom,rgba(0,0,5,.85),transparent);transition:background .3s;}
+nav.solid{background:rgba(0,0,5,.95);}
+.nav-logo{font-family:var(--ff-head);font-size:30px;letter-spacing:6px;position:relative;z-index:1;}
+.nav-logo span{color:var(--c1);}
+.nav-links{display:flex;gap:44px;list-style:none;}
+.nav-links a{font-family:var(--ff-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);position:relative;transition:color .3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--c1);transition:width .3s;}
+.nav-links a:hover{color:var(--c1);}
+.nav-links a:hover::after{width:100%;}
+
+/* HERO */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 80px;}
+.hero-tag{font-family:var(--ff-mono);font-size:12px;letter-spacing:4px;color:var(--c1);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:16px;opacity:0;animation:slideUp .8s .5s forwards;}
+.hero-tag::before{content:'';width:36px;height:1px;background:var(--c1);}
+.hero-name{font-family:var(--ff-head);font-size:clamp(100px,16vw,220px);line-height:.85;letter-spacing:4px;opacity:0;animation:slideUp .9s .65s forwards;}
+.hero-name .stroke{-webkit-text-stroke:1.5px rgba(255,255,255,.12);color:transparent;}
+.hero-name .lit{color:var(--c1);text-shadow:0 0 80px rgba(0,255,204,.45),0 0 160px rgba(0,255,204,.15);}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:36px;opacity:0;animation:slideUp .8s .85s forwards;}
+.hero-role{font-family:var(--ff-mono);font-size:15px;color:var(--muted);}
+.typed-c{display:inline-block;width:2px;height:14px;background:var(--c2);margin-left:2px;vertical-align:middle;animation:blink .7s infinite;}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--ff-mono);font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
+.s-track{width:1px;height:65px;background:rgba(255,255,255,.1);overflow:hidden;}
+.s-thumb{width:1px;height:28px;background:var(--c1);animation:sdown 1.6s ease-in-out infinite;}
+@keyframes sdown{0%{transform:translateY(-28px);}100%{transform:translateY(65px);}}
+
+/* MARQUEE */
+.mq{position:relative;z-index:1;padding:32px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden;background:rgba(0,0,5,.6);}
+.mq-track{display:flex;gap:56px;width:max-content;animation:mq 20s linear infinite;}
+.mq-item{font-family:var(--ff-head);font-size:44px;letter-spacing:4px;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);transition:color .3s,-webkit-text-stroke .3s;}
+.mq-item:hover{color:var(--c1);-webkit-text-stroke:1px var(--c1);}
+.mq-dot{color:var(--c2);-webkit-text-stroke:none;}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* SECTION */
+.s{position:relative;z-index:1;padding:150px 60px;}
+.s-lbl{font-family:var(--ff-mono);font-size:11px;letter-spacing:4px;color:var(--c1);text-transform:uppercase;display:flex;align-items:center;gap:20px;margin-bottom:18px;}
+.s-lbl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(0,255,204,.3),transparent);}
+.s-h{font-family:var(--ff-head);font-size:clamp(60px,9vw,120px);line-height:.9;letter-spacing:3px;margin-bottom:80px;}
+.s-h .ghost{-webkit-text-stroke:1px rgba(255,255,255,.1);color:transparent;}
+
+/* SKILLS */
+#skills{background:var(--bg);}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);}
+.sk-card{background:var(--bg);padding:60px 44px;position:relative;overflow:hidden;transition:background .5s;cursor:none;transform-style:preserve-3d;}
+.sk-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,255,204,.07),transparent 55%);opacity:0;transition:opacity .4s;}
+.sk-card:hover::before{opacity:1;}
+.sk-card:hover{background:#020210;}
+.sk-ghost{font-family:var(--ff-head);font-size:110px;color:rgba(0,255,204,.03);line-height:1;position:absolute;top:-10px;right:12px;}
+.sk-ico{font-size:26px;color:var(--c1);margin-bottom:28px;display:block;transition:transform .4s;}
+.sk-card:hover .sk-ico{transform:scale(1.25) rotate(-8deg);}
+.sk-name{font-family:var(--ff-head);font-size:32px;letter-spacing:2px;margin-bottom:14px;}
+.sk-desc{font-size:14px;line-height:1.8;color:var(--muted);}
+.sk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.sk-tag{font-family:var(--ff-mono);font-size:10px;letter-spacing:1px;padding:5px 12px;border:1px solid rgba(255,255,255,.08);color:var(--muted);transition:all .3s;}
+.sk-card:hover .sk-tag{border-color:rgba(0,255,204,.4);color:var(--c1);}
+
+/* PROJECTS */
+#projects{background:#02020c;}
+.proj-list{border-top:1px solid rgba(255,255,255,.06);}
+.proj-row{display:grid;grid-template-columns:60px 1fr 1fr 110px;align-items:center;padding:32px 0;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;cursor:none;transition:padding-left .4s;}
+.proj-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(0,255,204,.05),transparent);transition:width .5s;}
+.proj-row:hover::before{width:100%;}
+.proj-row:hover{padding-left:18px;}
+.proj-n{font-family:var(--ff-mono);font-size:11px;letter-spacing:2px;color:var(--muted);}
+.proj-title{font-family:var(--ff-head);font-size:clamp(26px,4vw,50px);letter-spacing:2px;transition:color .3s;}
+.proj-row:hover .proj-title{color:var(--c1);}
+.proj-cat{font-family:var(--ff-mono);font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.proj-btns{display:flex;gap:12px;justify-content:flex-end;}
+.proj-btn{width:44px;height:44px;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted);transition:all .3s;}
+.proj-btn:hover{border-color:var(--c1);color:var(--c1);transform:scale(1.1);}
+
+/* ABOUT */
+#about{background:var(--bg);}
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.a3d-wrap{perspective:1100px;width:100%;aspect-ratio:1;}
+.a3d-card{width:100%;height:100%;transform-style:preserve-3d;transition:transform .1s;position:relative;border:1px solid rgba(0,255,204,.12);}
+.a3d-inner{position:absolute;inset:0;background:url('about.png') center/contain no-repeat,linear-gradient(135deg,rgba(0,255,204,.04),rgba(112,0,255,.05));background-repeat:no-repeat;}
+.a3d-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,5,.85),transparent 60%);}
+.a-acc{position:absolute;border:1px solid;pointer-events:none;}
+.a-acc1{inset:-16px -16px auto auto;width:55%;height:55%;border-color:rgba(255,45,120,.18);animation:afloat 7s ease-in-out infinite;}
+.a-acc2{inset:auto auto -12px -12px;width:45%;height:45%;border-color:rgba(112,0,255,.25);animation:afloat 9s ease-in-out infinite reverse;}
+@keyframes afloat{0%,100%{transform:translate(0,0);}50%{transform:translate(8px,-12px);}}
+.a-scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--c1),transparent);animation:scan 3s linear infinite;opacity:.4;}
+@keyframes scan{0%{top:-2px;}100%{top:100%;}}
+.a-txt .a-tag{font-family:var(--ff-mono);font-size:11px;letter-spacing:3px;color:var(--c1);text-transform:uppercase;margin-bottom:20px;}
+.a-txt h2{font-family:var(--ff-head);font-size:clamp(44px,6vw,76px);line-height:.95;letter-spacing:2px;margin-bottom:32px;}
+.a-txt h2 em{-webkit-text-stroke:1px var(--c2);color:transparent;font-style:normal;}
+.a-txt p{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:16px;}
+.a-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);margin-top:44px;}
+.a-stat{background:var(--bg);padding:22px;text-align:center;}
+.a-sn{font-family:var(--ff-head);font-size:50px;color:var(--c1);line-height:1;}
+.a-sl{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+
+/* CONTACT */
+#contact{background:#02020c;}
+.c-wrap{display:grid;grid-template-columns:1fr 1fr;gap:100px;}
+.c-left h2{font-family:var(--ff-head);font-size:clamp(56px,9vw,120px);line-height:.88;letter-spacing:3px;margin-bottom:56px;}
+.c-left h2 em{-webkit-text-stroke:1px var(--c1);color:transparent;font-style:normal;}
+.c-item{display:flex;align-items:center;gap:18px;margin-bottom:22px;font-family:var(--ff-mono);font-size:13px;color:var(--muted);}
+.c-ico{width:46px;height:46px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--c1);flex-shrink:0;transition:all .3s;}
+.c-item:hover .c-ico{background:var(--c1);color:var(--bg);border-color:var(--c1);}
+.c-socs{display:flex;gap:14px;margin-top:44px;}
+.c-soc{width:46px;height:46px;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--muted);transition:all .3s;}
+.c-soc:hover{border-color:var(--c1);color:var(--c1);transform:translateY(-4px);}
+.cform{display:flex;flex-direction:column;gap:28px;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cf-f{position:relative;}
+.cf-f label{font-family:var(--ff-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.cf-f input,.cf-f textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--white);font-family:var(--ff-body);font-size:14px;padding:12px 0;outline:none;transition:border-color .3s;cursor:none;}
+.cf-f input:focus,.cf-f textarea:focus{border-bottom-color:var(--c1);}
+.cf-f textarea{resize:none;height:110px;}
+.cf-line{position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--c1);transition:width .4s;pointer-events:none;}
+.cf-f:focus-within .cf-line{width:100%;}
+.mbtn{display:inline-flex;align-items:center;gap:12px;padding:18px 48px;border:1px solid var(--c1);background:transparent;font-family:var(--ff-mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--c1);cursor:none;position:relative;overflow:hidden;transition:color .4s;}
+.mbtn::before{content:'';position:absolute;inset:0;background:var(--c1);transform:translateY(101%);transition:transform .4s cubic-bezier(.77,0,.18,1);}
+.mbtn:hover::before{transform:translateY(0);}
+.mbtn:hover{color:var(--bg);}
+.mbtn span{position:relative;z-index:1;}
+#fst{font-family:var(--ff-mono);font-size:11px;color:var(--c1);}
+
+/* FOOTER */
+footer{position:relative;z-index:1;padding:28px 60px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;font-family:var(--ff-mono);font-size:11px;letter-spacing:2px;color:var(--muted);}
+.f-logo{font-family:var(--ff-head);font-size:22px;letter-spacing:5px;}
+.f-logo span{color:var(--c1);}
+
+/* ANIMATIONS */
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(50px);}to{opacity:1;transform:translateY(0);}}
+
+.rv{opacity:0;transform:translateY(50px);transition:opacity .9s ease,transform .9s ease;}
+.rv.on{opacity:1;transform:none;}
+.rv-l{opacity:0;transform:translateX(-50px);transition:opacity .9s ease,transform .9s ease;}
+.rv-l.on{opacity:1;transform:none;}
+.rv-r{opacity:0;transform:translateX(50px);transition:opacity .9s ease,transform .9s ease;}
+.rv-r.on{opacity:1;transform:none;}
+[data-d="1"]{transition-delay:.1s!important;}
+[data-d="2"]{transition-delay:.2s!important;}
+[data-d="3"]{transition-delay:.3s!important;}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .s{padding:90px 24px;}
+  #hero{padding:0 24px 60px;}
+  .sk-grid{grid-template-columns:1fr;}
+  .about-g{grid-template-columns:1fr;gap:50px;}
+  .c-wrap{grid-template-columns:1fr;gap:60px;}
+  .cf-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;padding:20px 24px;text-align:center;}
+  #cur,#cur2{display:none;}
+  *{cursor:auto!important;}
+  .proj-row{grid-template-columns:44px 1fr 100px;}
+  .proj-cat{display:none;}
+}
+</style>
 </head>
 <body>
-    <div class="custom-cursor site-wide">
-		<div class="pointer"></div>
-	</div>
-    <div class="nav" id = "nav">
-        <div class="name_box" id = "name_box">
-            Sk Fahimuddin
-        </div>
-        <div class ="nav_buttons" id ="nav_buttons">
-            <a class ="home" id="home" href="#container">Home</a>
-            <a class ="about" id="about" href="#about_block">About</a>
-            <a class ="projects" id="projects" href="#projects_div">Projects</a>
-            <a class ="contact" id="contact" href="#con_body">Contact</a>
-            
 
-            <div class="nav_phone" id="nav_phone">
-                <a href="#container"><i class="fa-solid fa-house"  ></i></a>
-                <a href="#about_block"><i class="fa-solid fa-question" ></i></a>
-                <a href="#projects_div"><i class="fa-solid fa-briefcase"></i></a>
-                <a href="#con_body"><i class="fa-solid fa-phone"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class ="container " id = "container">
-        <div class="intro" id ="intro">
-            <div class="intro_name" id="intro_name">
-                <h1>I'm <span style="color: rgb(0, 155, 212);text-shadow: 1px 0 0 white, -1px 0 0 white, 0 1px 0 white, 0 -1px 0 white;">Sk Fahimuddin</span></h1>
-                <h2 style="margin-top:10vh ;">
-                    <span id="static-letter" style="color: rgb(0, 155, 212);">A</span> <span id="role"></span>
-                    <span class="cursor">|</span>
-                </h2>
-            </div>
-            <div class="res_but" id="res_but" style="text-align: center;margin-top:20vh ;">
-                <a class="res" id="res" >Download resume</a>
-                <a class="con" id="con" href="#con_body">Say Hello</a>
-            </div>
-            
-        </div>
-        <div class="pic" id="pic">
-            <div class="picture" id="picture"></div>
-        </div>
-    </div>
-    <div class="social_bar" id="social_bar">
-        <button class="linkedin" id="linkedin" onclick="window.location.href='https://www.linkedin.com/in/sk-fahim-532004312/'"><i class="fa-brands fa-linkedin-in"></i></button>
-        <button class="github" id="github" onclick="window.location.href='https://github.com/SkFahimuddin';"><i class="fa-brands fa-github"></i></button>
-        <button class="X" id="X" onclick="window.location.href='https://x.com/skf4988';"><i class="fa-brands fa-x-twitter"></i></button>
-        <button class="insta" id="insta" onclick="window.location.href='https://www.instagram.com/';"><i class="fa-brands fa-instagram"></i></button>
-    </div>
-    <div class="box_cards" id="box_cards">
-        <div class="AI" id="AI" data-tilt data-tilt-glare>
-            <h3><span style="border-bottom:2px solid white;" >Artificial Intelligence</span></h3>
-            <br>
-            Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence, such as understanding language, recognizing patterns, solving problems, and making decisions. AI systems learn from data and experience, improving their performance over time without being explicitly programmed for each task.
-        </div>
-        <div class="web_dev" id="web_dev" data-tilt data-tilt-glare>
-            <h3><span style="border-bottom:2px solid white;" >Web Developer</span></h3>
-            <br>
-            Web development involves creating and maintaining websites, encompassing everything from designing the layout and user interface to coding the site's functionality. It includes front-end development (user-facing design and interactivity), back-end development (server-side logic, databases), and full-stack development (both front-end and back-end), ensuring a seamless online experience.
-        </div>
-        <div class="ui_ux" id="ui_ux" data-tilt data-tilt-glare>
-            <h3><span style="border-bottom:2px solid white;" >UI/UX</span></h3>
-            <br>
-            UI (User Interface) is the visual design of a product, focusing on how elements like buttons, icons, and menus look and interact. UX (User Experience) emphasizes the user's overall interaction with the product, aiming to make it intuitive, efficient, and enjoyable by optimizing functionality and ease of use.
-        </div>
-    </div>
-    <div class="about_block" id="about_block">
-        <div class="about_div" id="about_div">
-            <div class="about_det" id ="about_det">
-                <div class="about_pic" id ="about_pic"></div>
-                <div class="about_info" id ="about_info">
-                    <h2>About me,</h2>
-                    <h1 style="font-size: 50px;color: rgb(0, 155, 212);margin-bottom: 8vh;margin-top: 0;border-bottom: 2px solid white;">I Develop System that Works</h1>
-                    <br>
-                    <span >I'm SK Fahimuddin, a 20-year-old college student deeply passionate about technology. I'm currently studying B.Tech in Computer Science and Artificial Intelligence at Techno India University. My educational journey began at Loyola High School for middle school and then I completed high school at MP Birla High School. Computers have always been my driving force, and I've consistently excelled in computer-related subjects. My strong passion for coding has led me to learn languages like Java, Python, C, C++, and Javascript. I enjoy activities that challenge my mind, such as playing chess and coding. Playing chess not only helps me to relax, but it also teaches me to deal with real-life situations. It allows me to make more informed decisions. While coding teaches me to learn from mistakes and strive for improvement. I enjoy working on tech projects and I find great satisfaction in tackling challenging coding projects and honing my abilities.. Beyond tech, I have a keen interest in stand-up comedy, gaming, and music. I'm dedicated to continual self-improvement to broaden my knowledge and work on impactful projects in the field of technology. My goal is to engage with like-minded individuals, collaborate with them, and refine my skills.</span>
-                </div>
-            </div>
-            <div class="edu" id="edu">
-                <div class="about_line" id="about_line">
-                    <span style="font-family: Georgia, 'Times New Roman', Times, serif;">Education</span>
-                </div>
-                <div class="edu_info" id="edu_info">
-                    <div class="edu_10" id="edu_10" data-tilt data-tilt-glare>
-                        <h2 style="border-bottom: 2px solid white;">Middle School</h2>
-                        <br><br>
-                        <div class="edu_tag" ><span > from </span>
-                            <br><br><span style="color:rgb(0, 155, 212);font-weight: 1000 ;">Loyola High School</span>
-                        </div>
-                    </div>
-                    <div class="edu_12" id="edu_12" data-tilt data-tilt-glare>
-                        <h2 style="border-bottom: 2px solid white;">High School</h2>
-                        <br><br>
-                        <div class="edu_tag" ><span > from </span>
-                            <br><br><span style="color:rgb(0, 155, 212);font-weight: 1000 ;">MP Birla Foundation Of Higher Secondary School</span>
-                        </div>
-                    </div>
-                    <div class="edu_btech" id="edu_btech" data-tilt data-tilt-glare>
-                        <h2 style="border-bottom: 2px solid white;">BTech</h2>
-                        <br><br>
-                        <div class="edu_tag" ><span > from </span>
-                            <br><br><span style="color:rgb(0, 155, 212);font-weight: 1000 ;">Techno India University</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="projects_div" id="projects_div">
-        <div class="pro_div" id="pro_div">
-            <h1 class="pro_heading" >My Projects</h1>
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-name" data-t="FAHIMUDDIN">FAHIMUDDIN</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
 
-            
-            <div class="project_otto" id="project_otto">
-                <div class="pro_ottodiv" id="pro_ottodiv">
-                    <div class="pro_ottoimg" id="pro_ottoimg">
-                        <button class="ottobtn" id="ottogit" onclick="window.location.href='https://github.com/SkFahimuddin'"><i class="fa-brands fa-github"></i></button>
-                    </div>
-                    <div class="pro_ottoinfo" id="pro_ottoinfo" >
-                        <h2>OTTO ROBOT</h2>
-                        <br>
-                        <span style="color: white;">Otto is an open-source, 3D-printed bipedal robot designed for educational purposes and DIY robotics enthusiasts. Powered by an Arduino microcontroller and servo motors, it can walk, dance, and avoid obstacles using ultrasonic sensors. Otto is highly customizable, allowing users to add features like Bluetooth control, voice recognition, or additional sensors. It can be programmed using the Arduino IDE or visual platforms like Scratch, making it suitable for all skill levels. Otto’s modular design and strong global community support make it an excellent tool for learning robotics, coding, and engineering in an engaging, hands-on way</span>
-                    </div>
-                </div>
-            </div>
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur2"></div>
 
-            <div class="project_jarvis" id="project_jarvis">
-                <div class="pro_jarvisdiv" id="pro_jarvisdiv"> 
-                    <div class="pro_jarvisinfo" id="pro_jarvisinfo">
-                        <h2>JARVIS</h2>
-                        <br>
-                        <span style="color: white;">Jarvis is an AI-powered virtual assistant built using Python, designed to help users with a wide range of tasks through voice interaction. Equipped with speech recognition and text-to-speech capabilities, Jarvis can listen to commands, respond verbally, and perform tasks such as web searches, setting reminders, sending emails, or controlling smart home devices. Jarvis is highly customizable, allowing for the integration of additional features like natural language processing (NLP) for better understanding of user queries and automation scripts to streamline daily tasks. Its goal is to enhance productivity and simplify routine activities through an intuitive, voice-controlled interface.</span>
-                    </div>
-                    <div class="pro_jarvisimg" id="pro_jarvisimg">
-                        <button class="btn" id="jarvisgit" onclick="window.location.href='https://github.com/SkFahimuddin/assist'"><i class="fa-brands fa-github"></i></button>
-                        <button class="btn" id="jarvisweb" onclick="window.location.href='https://jarvis-nu-brown.vercel.app/'"><i class="fa-solid fa-globe"></i></button>
-                    </div>
-                </div>
-            </div>
+<!-- THREE.JS BG -->
+<canvas id="bg-canvas"></canvas>
 
-            <div class="project_pagepallet" id="project_pagepallet">
-                <div class="pro_pagepalletdiv" id="pro_pagepalletdiv">
-                    <div class="pro_pagepalletimg" id="pro_pagepalletimg">
-                        <button class="btn" id="pagepalletegit" onclick="window.location.href='https://github.com/SkFahimuddin/PagePalette'"><i class="fa-brands fa-github"></i></button>
-                        <button class="btn" id="pagepalleteweb" onclick="window.location.href='https://page-palette-ruddy.vercel.app'"><i class="fa-solid fa-globe"></i></button>
-                    </div>
-                    <div class="pro_pagepalletinfo" id="pro_pagepalletinfo">
-                        <h2>PAGEPALLETE</h2>
-                        <br>
-                        <span style="color: white;">Pagepalette is a user-friendly web app designed to help book lovers discover new reads by recommending books based on specific topics or authors. Users can easily search for their interests, entering keywords related to genres, themes, or names of authors. The app quickly retrieves a curated list of books that align with the user’s input, making it simple to find exciting new titles. With an intuitive interface and a comprehensive database, Pagepalette enhances the reading experience, encouraging users to explore diverse literary options and expand their personal libraries. It's the perfect companion for anyone looking to delve deeper into the world of books.</span>
-                    </div>
-                </div>
-            </div>
+<!-- NAV -->
+<nav id="mainnav">
+  <a class="nav-logo" href="#hero">SK<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-            <div class="project_fittech" id="project_fittech">
-                <div class="pro_fittechdiv" id="pro_fittechdiv">
-                    <div class="pro_fittechinfo" id="pro_fittechinfo">
-                        <h2>FITTECH</h2>
-                        <br>
-                        <span style="color: white;">FitTech is a personalized fitness app designed to help users achieve their health and wellness goals by providing tailored diet recommendations and exercise guidance. By inputting their weight, height, and preferred sports or exercises, users receive customized diet videos that offer meal ideas and nutrition tips specifically aligned with their fitness needs. The app also features detailed descriptions of various exercises and sports, ensuring users understand proper techniques and benefits. With a focus on individual requirements, FitTech aims to create a holistic approach to fitness, empowering users to make informed decisions about their diet and physical activities for optimal results.</span>
-                    </div>
-                    <div class="pro_fittechimg" id="pro_fittechimg">
-                        <button class="btn" id="fittechgit" onclick="window.location.href='https://github.com/SkFahimuddin/fittech'"><i class="fa-brands fa-github"></i></button>
-                        <button class="btn" id="fittechgit" onclick="window.location.href='https://fittech.vercel.app/'"><i class="fa-solid fa-globe"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Developer · AI Engineer · Builder</div>
+  <h1 class="hero-name">
+    <span class="stroke">SK</span> <span class="lit">FAHIM</span><br>
+    <span class="stroke">UDDIN</span>
+  </h1>
+  <div class="hero-bottom">
+    <div class="hero-role"><span id="typed"></span><span class="typed-c"></span></div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="s-track"><div class="s-thumb"></div></div>
     </div>
-    <br>
-    <div style="width: 100%; border-bottom: 5px solid  rgb(0, 155, 212)"></div>
-    <br>
-    <div class="con_body" id="con_body">
-        <div class="contact-container">
-            <div class="contact-info" id="contact-info">
-                <h1>Contact</h1>
-                <p>Email: skfahimuddin@gmail.com</p>
-                <p>Phone: +91 987654321</p>
-            </div>
+  </div>
+</section>
 
-            
-            <div class="form-container" id="form-container">
-                <form id="contact-form">
-                    <div class="form-group" id="form-group">
-                        <label for="first-name">First Name <span class="required">*</span></label>
-                        <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
-                    </div>
-            
-                    <div class="form-group half-right">
-                        <label for="last-name">Last Name <span class="required">*</span></label>
-                        <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
-                    </div>
-            
-                    <div class="form-group">
-                        <label for="email">Email <span class="required">*</span></label>
-                        <input type="email" id="con_email" name="email" placeholder="example@mygmail.com" required>
-                    </div>
-            
-                    <div class="form-group half-right">
-                        <label for="phone">Phone</label>
-                        <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
-                    </div>
-            
-                    <div class="form-group" style="width: 100%;">
-                        <label for="message">Leave us a message...<span class="required">*</span></label>
-                        <textarea id="message" name="message" placeholder="Your message" required></textarea>
-                    </div>
-            
-                    <input type="submit" value="Submit">
-                </form>
-            
-                <div id="status"></div>
-            </div>
-            
-            <!-- Add the EmailJS SDK -->
-            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-            <script>
-                (function(){
-                    emailjs.init("t5V8Jgt0na69vaVW7"); // Replace with your EmailJS public key
-                })();
-            </script>
-        </div>
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track" id="mqt">
+    <span class="mq-item">FLUTTER</span><span class="mq-dot"> · </span>
+    <span class="mq-item">AI ENGINEER</span><span class="mq-dot"> · </span>
+    <span class="mq-item">FULL STACK</span><span class="mq-dot"> · </span>
+    <span class="mq-item">GROQ API</span><span class="mq-dot"> · </span>
+    <span class="mq-item">FIREBASE</span><span class="mq-dot"> · </span>
+    <span class="mq-item">REACT</span><span class="mq-dot"> · </span>
+    <span class="mq-item">FLUTTER</span><span class="mq-dot"> · </span>
+    <span class="mq-item">AI ENGINEER</span><span class="mq-dot"> · </span>
+    <span class="mq-item">FULL STACK</span><span class="mq-dot"> · </span>
+    <span class="mq-item">GROQ API</span><span class="mq-dot"> · </span>
+    <span class="mq-item">FIREBASE</span><span class="mq-dot"> · </span>
+    <span class="mq-item">REACT</span><span class="mq-dot"> · </span>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" class="s">
+  <div class="s-lbl rv">01 — Expertise</div>
+  <h2 class="s-h rv">What I <span class="ghost">Build</span></h2>
+  <div class="sk-grid">
+    <div class="sk-card rv" data-d="1">
+      <div class="sk-ghost">01</div>
+      <i class="sk-ico fa-solid fa-brain"></i>
+      <div class="sk-name">AI Engineering</div>
+      <div class="sk-desc">LLM integrations, memory-injected AI assistants, agentic pipelines. From Jarvis 2.0 to Friday's 16-phase roadmap.</div>
+      <div class="sk-tags"><span class="sk-tag">Groq API</span><span class="sk-tag">LLaMA 3.3</span><span class="sk-tag">SQLite</span><span class="sk-tag">Python</span></div>
     </div>
-    <div style="width: 100%;height: 5vh;background-color:  rgb(0, 155, 212);border-top: solid 2px white;color: rgb(19, 19, 27);text-align: center;font-size: 30px;font-weight: bold;"><span>Thank You</span></div>
+    <div class="sk-card rv" data-d="2">
+      <div class="sk-ghost">02</div>
+      <i class="sk-ico fa-solid fa-layer-group"></i>
+      <div class="sk-name">Full-Stack Web</div>
+      <div class="sk-desc">End-to-end apps — React, Node.js, Flask, MongoDB. Real-time with Socket.io. Deployed to Render & Vercel.</div>
+      <div class="sk-tags"><span class="sk-tag">React</span><span class="sk-tag">Node.js</span><span class="sk-tag">Flask</span><span class="sk-tag">MongoDB</span></div>
+    </div>
+    <div class="sk-card rv" data-d="3">
+      <div class="sk-ghost">03</div>
+      <i class="sk-ico fa-solid fa-mobile-screen"></i>
+      <div class="sk-name">Mobile / Flutter</div>
+      <div class="sk-desc">Cross-platform apps with Flutter & Firebase. Riverpod state management. From messaging to offline AI assistants.</div>
+      <div class="sk-tags"><span class="sk-tag">Flutter</span><span class="sk-tag">Firebase</span><span class="sk-tag">Riverpod</span><span class="sk-tag">Dart</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="s">
+  <div class="s-lbl rv">02 — Work</div>
+  <h2 class="s-h rv">Selected <span class="ghost">Projects</span></h2>
+  <div class="proj-list">
+    <div class="proj-row rv">
+      <div class="proj-n">01</div>
+      <div class="proj-title">JARVIS 2.0</div>
+      <div class="proj-cat">AI Assistant · Flask · Groq</div>
+      <div class="proj-btns">
+        <a class="proj-btn" href="https://github.com/SkFahimuddin/assist" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a class="proj-btn" href="https://jarvis-nu-brown.vercel.app/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+    <div class="proj-row rv" data-d="1">
+      <div class="proj-n">02</div>
+      <div class="proj-title">FRIDAY</div>
+      <div class="proj-cat">Flutter AI · Offline · Phase 4</div>
+      <div class="proj-btns">
+        <a class="proj-btn" href="https://github.com/SkFahimuddin" target="_blank"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="proj-row rv" data-d="2">
+      <div class="proj-n">03</div>
+      <div class="proj-title">SETTLEIT</div>
+      <div class="proj-cat">Real-time AI · React · Socket.io</div>
+      <div class="proj-btns">
+        <a class="proj-btn" href="https://github.com/SkFahimuddin" target="_blank"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="proj-row rv" data-d="1">
+      <div class="proj-n">04</div>
+      <div class="proj-title">PAGEPALETTE</div>
+      <div class="proj-cat">Book Discovery · Web</div>
+      <div class="proj-btns">
+        <a class="proj-btn" href="https://github.com/SkFahimuddin/PagePalette" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a class="proj-btn" href="https://page-palette-ruddy.vercel.app" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+    <div class="proj-row rv" data-d="2">
+      <div class="proj-n">05</div>
+      <div class="proj-title">FITTECH</div>
+      <div class="proj-cat">Fitness App · Web</div>
+      <div class="proj-btns">
+        <a class="proj-btn" href="https://github.com/SkFahimuddin/fittech" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a class="proj-btn" href="https://fittech.vercel.app/" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+    <div class="proj-row rv" data-d="3">
+      <div class="proj-n">06</div>
+      <div class="proj-title">OTTO ROBOT</div>
+      <div class="proj-cat">Arduino · IoT · Robotics</div>
+      <div class="proj-btns">
+        <a class="proj-btn" href="https://github.com/SkFahimuddin" target="_blank"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="s">
+  <div class="s-lbl rv">03 — About</div>
+  <div class="about-g">
+    <div style="position:relative;" class="rv-l">
+      <div class="a3d-wrap" id="a3w">
+        <div class="a3d-card" id="a3c">
+          <div class="a3d-inner">
+            <div class="a-scan"></div>
+          </div>
+        </div>
+      </div>
+      <div class="a-acc a-acc1"></div>
+      <div class="a-acc a-acc2"></div>
+    </div>
+    <div class="a-txt rv-r">
+      <div class="a-tag">// B.Tech CS+AI · Techno India University</div>
+      <h2>I Build<br><em>Real Things</em></h2>
+      <p>I'm SK Fahimuddin, a 20-year-old college student deeply passionate about technology. I'm currently studying B.Tech in Computer Science and Artificial Intelligence at Techno India University. My educational journey began at Loyola High School for middle school and then I completed high school at MP Birla High School. Computers have always been my driving force, and I've consistently excelled in computer-related subjects. My strong passion for coding has led me to learn languages like Java, Python, C, C++, and Javascript. I enjoy activities that challenge my mind, such as playing chess and coding. Playing chess not only helps me to relax, but it also teaches me to deal with real-life situations. It allows me to make more informed decisions. While coding teaches me to learn from mistakes and strive for improvement. I enjoy working on tech projects and I find great satisfaction in tackling challenging coding projects and honing my abilities.. Beyond tech, I have a keen interest in stand-up comedy, gaming, and music. I'm dedicated to continual self-improvement to broaden my knowledge and work on impactful projects in the field of technology. My goal is to engage with like-minded individuals, collaborate with them, and refine my skills.</p>
+      <div class="a-stats">
+        <div class="a-stat"><div class="a-sn" data-count="6">0</div><div class="a-sl">Projects</div></div>
+        <div class="a-stat"><div class="a-sn" data-count="10">0</div><div class="a-sl">Tech Stack</div></div>
+        <div class="a-stat"><div class="a-sn" data-count="20">0</div><div class="a-sl">Age</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="s">
+  <div class="s-lbl rv">04 — Contact</div>
+  <div class="c-wrap">
+    <div class="c-left rv-l">
+      <h2>LET'S<br><em>TALK</em></h2>
+      <div class="c-item"><div class="c-ico"><i class="fa-solid fa-envelope"></i></div>skfahimuddin@gmail.com</div>
+      <div class="c-item"><div class="c-ico"><i class="fa-solid fa-location-dot"></i></div>West Bengal, India</div>
+      <div class="c-socs">
+        <a class="c-soc" href="https://www.linkedin.com/in/sk-fahim-532004312/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a class="c-soc" href="https://github.com/SkFahimuddin" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a class="c-soc" href="https://x.com/skf4988" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        <a class="c-soc" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="rv-r">
+      <form class="cform" id="cform">
+        <div class="cf-row">
+          <div class="cf-f"><label>First Name *</label><input type="text" id="fn" required/><div class="cf-line"></div></div>
+          <div class="cf-f"><label>Last Name *</label><input type="text" id="ln" required/><div class="cf-line"></div></div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-f"><label>Email *</label><input type="email" id="em" required/><div class="cf-line"></div></div>
+          <div class="cf-f"><label>Phone</label><input type="text" id="ph"/><div class="cf-line"></div></div>
+        </div>
+        <div class="cf-f"><label>Message *</label><textarea id="msg" required></textarea><div class="cf-line"></div></div>
+        <div style="display:flex;align-items:center;gap:24px">
+          <button class="mbtn" type="submit"><span>Send Message</span></button>
+          <div id="fst"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">SK<span>.</span></div>
+  <span>©2026 Sk Fahimuddin - Fahim Industries </span>
+  <span>India</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+(function(){emailjs.init("t5V8Jgt0na69vaVW7");})();
+
+/* LOADER */
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('done'),2100);});
+
+/* CURSOR */
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function lp(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cur.style.left=mx+'px';cur.style.top=my+'px';cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(lp);})();
+
+/* NAV SCROLL */
+window.addEventListener('scroll',()=>{document.getElementById('mainnav').classList.toggle('solid',scrollY>60);});
+
+/* THREE.JS BG */
+(function(){
+  const canvas=document.getElementById('bg-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,1000);
+  cam.position.z=6;
+
+  /* Rotating wire icosahedra */
+  const addWire=(size,detail,color,opacity,x=0,y=0,z=0)=>{
+    const m=new THREE.Mesh(new THREE.IcosahedronGeometry(size,detail),new THREE.MeshBasicMaterial({color,wireframe:true,transparent:true,opacity}));
+    m.position.set(x,y,z);scene.add(m);return m;
+  };
+  const ico1=addWire(2.2,1,0x00ffcc,.1);
+  const ico2=addWire(1.6,1,0x7000ff,.06);
+  const ico3=addWire(1,1,0xff2d78,.08,3.5,1,-1);
+
+  /* Torus knot */
+  const tk=new THREE.Mesh(new THREE.TorusKnotGeometry(1.1,.3,130,14),new THREE.MeshBasicMaterial({color:0x7000ff,wireframe:true,transparent:true,opacity:.07}));
+  tk.position.set(-4.5,-1,0);scene.add(tk);
+
+  /* Octahedron */
+  const oct=new THREE.Mesh(new THREE.OctahedronGeometry(1.2,0),new THREE.MeshBasicMaterial({color:0xff2d78,wireframe:true,transparent:true,opacity:.1}));
+  oct.position.set(4.5,1.5,0);scene.add(oct);
+
+  /* Points */
+  const pos=[];for(let i=0;i<700;i++)pos.push((Math.random()-.5)*22,(Math.random()-.5)*22,(Math.random()-.5)*10);
+  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x00ffcc,size:.022,transparent:true,opacity:.45}));
+  scene.add(pts);
+
+  /* Grid */
+  const gridGeo=new THREE.PlaneGeometry(30,30,30,30);
+  const gridMat=new THREE.MeshBasicMaterial({color:0x00ffcc,wireframe:true,transparent:true,opacity:.025});
+  const grid=new THREE.Mesh(gridGeo,gridMat);
+  grid.rotation.x=-Math.PI/2.5;grid.position.y=-3;
+  scene.add(grid);
+
+  let tmx=0,tmy=0;
+  document.addEventListener('mousemove',e=>{tmx=(e.clientX/innerWidth-.5)*1.8;tmy=-(e.clientY/innerHeight-.5)*1.2;});
+  let t=0;
+  function tick(){
+    t+=.005;
+    ico1.rotation.x+=.003;ico1.rotation.y+=.005;
+    ico2.rotation.x-=.004;ico2.rotation.y-=.003;
+    ico3.rotation.y+=.007;ico3.rotation.z+=.003;
+    tk.rotation.x+=.005;tk.rotation.y+=.008;
+    oct.rotation.x+=.006;oct.rotation.z+=.004;
+    pts.rotation.y+=.0008;
+    grid.position.z=Math.sin(t)*.2;
+    cam.position.x+=(tmx-cam.position.x)*.035;
+    cam.position.y+=(tmy-cam.position.y)*.035;
+    cam.lookAt(scene.position);
+    renderer.render(scene,cam);
+    requestAnimationFrame(tick);
+  }
+  tick();
+  window.addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+})();
+
+/* TYPEWRITER */
+const roles=['Web Developer','Flutter Engineer','AI Builder','Full-Stack Dev'];
+let ri=0,ci=0,del=false,td=150;
+const tel=document.getElementById('typed');
+function type(){
+  const c=roles[ri];
+  if(del)tel.textContent=c.substring(0,ci--);else tel.textContent=c.substring(0,++ci);
+  if(!del&&ci===c.length){td=1400;del=true;}
+  else if(del&&ci===0){del=false;ri=(ri+1)%roles.length;td=400;}
+  else td=del?80:150;
+  setTimeout(type,td);
+}
+type();
+
+/* SCROLL REVEAL */
+const rvEls=document.querySelectorAll('.rv,.rv-l,.rv-r');
+const rvObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');rvObs.unobserve(e.target);}});},{threshold:.12});
+rvEls.forEach(el=>rvObs.observe(el));
+
+/* COUNT UP */
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const n=parseInt(el.getAttribute('data-count'));
+  const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){let c=0;const s=Math.ceil(n/28);const iv=setInterval(()=>{c=Math.min(c+s,n);el.textContent=c+(n>=10?'+':'');if(c>=n)clearInterval(iv);},40);o.unobserve(el);}},{threshold:.5});
+  o.observe(el);
+});
+
+/* 3D CARD */
+const a3w=document.getElementById('a3w'),a3c=document.getElementById('a3c');
+if(a3w){
+  a3w.addEventListener('mousemove',e=>{const r=a3w.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;a3c.style.transform=`rotateY(${x*26}deg) rotateX(${-y*18}deg)`;a3c.style.transition='transform .08s';});
+  a3w.addEventListener('mouseleave',()=>{a3c.style.transform='rotateX(0) rotateY(0)';a3c.style.transition='transform .6s cubic-bezier(.77,0,.18,1)';});
+}
+
+/* SKILL CARD GLOW */
+document.querySelectorAll('.sk-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});
+});
+
+/* CONTACT FORM */
+document.getElementById('cform').addEventListener('submit',function(e){
+  e.preventDefault();
+  const st=document.getElementById('fst');st.textContent='Sending...';
+  emailjs.send("service_zypq8jp","template_vbzcz38",{
+    first_name:document.getElementById('fn').value,last_name:document.getElementById('ln').value,
+    email:document.getElementById('em').value,phone:document.getElementById('ph').value,
+    message:document.getElementById('msg').value
+  }).then(()=>{st.textContent='✓ Message sent!';st.style.color='var(--c1)';this.reset();})
+  .catch(()=>{st.textContent='✗ Failed to send.';st.style.color='var(--c2)';});
+});
+</script>
 </body>
-<script src="vanilla-tilt.js"></script>
-<script src="script.js"></script>
-</html> 
+</html>
