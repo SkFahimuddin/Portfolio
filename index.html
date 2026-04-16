@@ -3,334 +3,497 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sk Fahimuddin</title>
+<title>SK FAHIMUDDIN — NEURAL CORE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous"/>
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="ld-ring">
-    <svg viewBox="0 0 200 200" class="ld-svg">
-      <circle cx="100" cy="100" r="80" class="ld-circle-bg"/>
-      <circle cx="100" cy="100" r="80" class="ld-circle-fill"/>
-    </svg>
-    <div class="ld-robot-icon">
-      <div class="ldr-head"></div>
-      <div class="ldr-body"></div>
-      <div class="ldr-legs">
-        <div class="ldr-leg"></div>
-        <div class="ldr-leg"></div>
-      </div>
+<!-- BOOT SEQUENCE -->
+<div id="boot">
+  <div class="boot-inner">
+    <div class="boot-line" data-delay="0">NEURAL CORE OS v4.2.1 — INITIALIZING...</div>
+    <div class="boot-line" data-delay="300">▶ LOADING COGNITIVE MATRIX.............. <span class="ok">OK</span></div>
+    <div class="boot-line" data-delay="700">▶ SCANNING NEURAL PATHWAYS.............. <span class="ok">OK</span></div>
+    <div class="boot-line" data-delay="1100">▶ INJECTING MEMORY PROTOCOLS............ <span class="ok">OK</span></div>
+    <div class="boot-line" data-delay="1400">▶ IDENTITY CONFIRMED: SK FAHIMUDDIN..... <span class="ok">OK</span></div>
+    <div class="boot-line" data-delay="1700">▶ RENDERING HOLOGRAPHIC INTERFACE......</div>
+    <div class="boot-bar">
+      <div class="boot-fill"></div>
     </div>
+    <div class="boot-final" data-delay="2000">ACCESS GRANTED</div>
   </div>
-  <div class="ld-text">INITIALIZING<span class="ld-dots">...</span></div>
-  <div class="ld-name">SK FAHIMUDDIN</div>
 </div>
 
 <!-- CURSOR -->
-<div id="cur"></div>
-<div id="cur2"></div>
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+<div id="c-trail"></div>
 
-<!-- THREE.JS BG -->
-<canvas id="bg-canvas"></canvas>
+<!-- SCAN LINES OVERLAY -->
+<div id="scanlines"></div>
+<div id="vignette"></div>
+<div id="noise"></div>
 
-<!-- ROBOT COMPANION -->
-<div id="robot-wrap">
-  <canvas id="robot-canvas"></canvas>
-  <div id="robot-msg"></div>
-</div>
+<!-- THREE.JS WARP CANVAS -->
+<canvas id="warp-canvas"></canvas>
 
 <!-- NAV -->
-<nav id="mainnav">
-  <a class="nav-logo" href="#hero">SK<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#skills" data-section="skills">Skills</a></li>
-    <li><a href="#projects" data-section="projects">Projects</a></li>
-    <li><a href="#about" data-section="about">About</a></li>
-    <li><a href="#contact" data-section="contact">Contact</a></li>
-  </ul>
-  <div class="nav-bar-indicator">
-    <div class="nbi-fill" id="nbi"></div>
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="nl-bracket">[</span>
+      <span class="nl-name">SK</span>
+      <span class="nl-dot">.</span>
+      <span class="nl-bracket">]</span>
+      <div class="nl-status">
+        <span class="nl-pulse"></span>
+        <span>ONLINE</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero" data-label="00">HOME</a></li>
+      <li><a href="#skills" data-label="01">SKILLS</a></li>
+      <li><a href="#projects" data-label="02">PROJECTS</a></li>
+      <li><a href="#about" data-label="03">ABOUT</a></li>
+      <li><a href="#contact" data-label="04">CONTACT</a></li>
+    </ul>
+    <div class="nav-sig">FAHIM_INDUSTRIES_©2026</div>
   </div>
+  <div class="nav-progress"><div id="np-fill"></div></div>
 </nav>
 
 <!-- HERO -->
-<section id="hero" data-section="hero">
-  <div class="hero-eyebrow rv">
-    <span class="eyebrow-line"></span>
-    <span class="eyebrow-txt">Developer · AI Engineer · Builder</span>
-  </div>
-  <h1 class="hero-name rv" data-d="1">
-    <span class="hn-row"><span class="hn-ghost">SK</span> <span class="hn-lit">FAHIM</span></span>
-    <span class="hn-row"><span class="hn-ghost">UDDIN</span></span>
-  </h1>
-  <div class="hero-bottom rv" data-d="2">
-    <div class="hero-role">
-      <span class="role-prefix">I am a</span>
-      <span id="typed"></span><span class="typed-c"></span>
+<section id="hero">
+  <div class="hero-bg-text" aria-hidden="true">NEURAL</div>
+  <div class="hero-content">
+    <div class="hero-sup rv">
+      <span class="hs-line"></span>
+      <span class="hs-text">DEVELOPER · AI ENGINEER · BUILDER</span>
+      <span class="hs-line"></span>
     </div>
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="s-track"><div class="s-thumb"></div></div>
+    <div class="hero-name-wrap rv" data-d="1">
+      <div class="hn-glitch" data-text="SK FAHIM">SK FAHIM</div>
+      <div class="hn-glitch hn-sub" data-text="UDDIN">UDDIN</div>
+    </div>
+    <div class="hero-meta rv" data-d="2">
+      <div class="hero-role">
+        <span class="hr-prefix">// CURRENTLY_</span>
+        <span id="typed"></span><span class="typed-caret">█</span>
+      </div>
+      <div class="hero-coords">
+        <span>LAT: 22.5°N</span>
+        <span class="hc-sep">|</span>
+        <span>LON: 88.4°E</span>
+        <span class="hc-sep">|</span>
+        <span>WB, INDIA</span>
+      </div>
+    </div>
+    <div class="hero-cta rv" data-d="3">
+      <a href="#projects" class="holo-btn">
+        <span class="hb-bg"></span>
+        <span class="hb-txt">VIEW PROJECTS</span>
+        <span class="hb-arrow">→</span>
+        <span class="hb-corner hb-tl"></span>
+        <span class="hb-corner hb-br"></span>
+      </a>
+      <a href="#contact" class="ghost-btn">INITIATE CONTACT</a>
     </div>
   </div>
+  <div class="hero-scroll-ind">
+    <div class="hsi-label">SCROLL TO TRAVERSE</div>
+    <div class="hsi-bar"><div class="hsi-fill"></div></div>
+  </div>
+  <div class="hero-corner-tl"></div>
+  <div class="hero-corner-br"></div>
+  <div class="hero-data-stream" aria-hidden="true" id="datastream"></div>
 </section>
 
 <!-- MARQUEE -->
 <div class="mq" aria-hidden="true">
-  <div class="mq-track" id="mqt">
-    <span class="mq-item">FLUTTER</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">AI ENGINEER</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">FULL STACK</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">GROQ API</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">FIREBASE</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">REACT</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">NODE.JS</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">ARDUINO</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">FLUTTER</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">AI ENGINEER</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">FULL STACK</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">GROQ API</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">FIREBASE</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">REACT</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">NODE.JS</span><span class="mq-dot"> ✦ </span>
-    <span class="mq-item">ARDUINO</span><span class="mq-dot"> ✦ </span>
+  <div class="mq-track">
+    <span>FLUTTER</span><span class="mq-sep">◈</span>
+    <span>AI ENGINEERING</span><span class="mq-sep">◈</span>
+    <span>FULL STACK</span><span class="mq-sep">◈</span>
+    <span>GROQ API</span><span class="mq-sep">◈</span>
+    <span>FIREBASE</span><span class="mq-sep">◈</span>
+    <span>REACT</span><span class="mq-sep">◈</span>
+    <span>NODE.JS</span><span class="mq-sep">◈</span>
+    <span>ARDUINO</span><span class="mq-sep">◈</span>
+    <span>THREE.JS</span><span class="mq-sep">◈</span>
+    <span>DART</span><span class="mq-sep">◈</span>
+    <span>FLUTTER</span><span class="mq-sep">◈</span>
+    <span>AI ENGINEERING</span><span class="mq-sep">◈</span>
+    <span>FULL STACK</span><span class="mq-sep">◈</span>
+    <span>GROQ API</span><span class="mq-sep">◈</span>
+    <span>FIREBASE</span><span class="mq-sep">◈</span>
+    <span>REACT</span><span class="mq-sep">◈</span>
+    <span>NODE.JS</span><span class="mq-sep">◈</span>
+    <span>ARDUINO</span><span class="mq-sep">◈</span>
+    <span>THREE.JS</span><span class="mq-sep">◈</span>
+    <span>DART</span><span class="mq-sep">◈</span>
   </div>
 </div>
 
 <!-- SKILLS -->
-<section id="skills" class="s" data-section="skills">
-  <div class="s-header">
-    <div class="s-lbl rv">01 — Expertise</div>
-    <h2 class="s-h rv" data-d="1">What I <span class="s-ghost">Build</span></h2>
-  </div>
+<section id="skills" class="section">
+  <div class="sec-label rv">01 // EXPERTISE_MATRIX</div>
+  <h2 class="sec-title rv" data-d="1">CAPABILITY<br><span class="st-outline">CORE</span></h2>
   <div class="sk-grid">
-    <div class="sk-card rv" data-d="1">
-      <div class="sk-num">01</div>
-      <div class="sk-glow"></div>
-      <i class="sk-ico fa-solid fa-brain"></i>
-      <div class="sk-name">AI Engineering</div>
-      <div class="sk-desc">LLM integrations, memory-injected AI assistants, agentic pipelines. From Jarvis 2.0 to Friday's 16-phase roadmap.</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Groq API</span><span class="sk-tag">LLaMA 3.3</span><span class="sk-tag">SQLite</span><span class="sk-tag">Python</span>
+
+    <div class="sk-holo rv" data-d="1">
+      <div class="sk-inner">
+        <div class="sk-front">
+          <div class="skf-num">01</div>
+          <div class="skf-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="skf-name">AI ENGINEERING</div>
+          <div class="skf-bar-wrap">
+            <div class="skf-bar"><div class="skf-fill" data-pct="92"></div></div>
+            <span class="skf-pct">92%</span>
+          </div>
+          <div class="skf-tags">
+            <span>Groq API</span><span>LLaMA 3.3</span><span>SQLite</span><span>Python</span>
+          </div>
+          <div class="sk-scan"></div>
+          <div class="sk-corner sk-tl"></div>
+          <div class="sk-corner sk-br"></div>
+        </div>
+        <div class="sk-hologram">
+          <div class="skh-text">LLM INTEGRATION<br>MEMORY INJECTION<br>AGENTIC PIPELINES<br>JARVIS 2.0<br>FRIDAY APP<br>16-PHASE ROADMAP</div>
+        </div>
       </div>
+      <div class="sk-glow-ring"></div>
     </div>
-    <div class="sk-card rv" data-d="2">
-      <div class="sk-num">02</div>
-      <div class="sk-glow"></div>
-      <i class="sk-ico fa-solid fa-layer-group"></i>
-      <div class="sk-name">Full-Stack Web</div>
-      <div class="sk-desc">End-to-end apps — React, Node.js, Flask, MongoDB. Real-time with Socket.io. Deployed to Render & Vercel.</div>
-      <div class="sk-tags">
-        <span class="sk-tag">React</span><span class="sk-tag">Node.js</span><span class="sk-tag">Flask</span><span class="sk-tag">MongoDB</span>
+
+    <div class="sk-holo rv" data-d="2">
+      <div class="sk-inner">
+        <div class="sk-front">
+          <div class="skf-num">02</div>
+          <div class="skf-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <div class="skf-name">FULL-STACK WEB</div>
+          <div class="skf-bar-wrap">
+            <div class="skf-bar"><div class="skf-fill" data-pct="88"></div></div>
+            <span class="skf-pct">88%</span>
+          </div>
+          <div class="skf-tags">
+            <span>React</span><span>Node.js</span><span>Flask</span><span>MongoDB</span>
+          </div>
+          <div class="sk-scan"></div>
+          <div class="sk-corner sk-tl"></div>
+          <div class="sk-corner sk-br"></div>
+        </div>
+        <div class="sk-hologram">
+          <div class="skh-text">REACT FRONTENDS<br>NODE.JS BACKENDS<br>SOCKET.IO REALTIME<br>REST APIs<br>RENDER + VERCEL<br>MERN STACK</div>
+        </div>
       </div>
+      <div class="sk-glow-ring"></div>
     </div>
-    <div class="sk-card rv" data-d="3">
-      <div class="sk-num">03</div>
-      <div class="sk-glow"></div>
-      <i class="sk-ico fa-solid fa-mobile-screen"></i>
-      <div class="sk-name">Mobile / Flutter</div>
-      <div class="sk-desc">Cross-platform apps with Flutter & Firebase. Riverpod state management. From messaging to offline AI assistants.</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Flutter</span><span class="sk-tag">Firebase</span><span class="sk-tag">Riverpod</span><span class="sk-tag">Dart</span>
+
+    <div class="sk-holo rv" data-d="3">
+      <div class="sk-inner">
+        <div class="sk-front">
+          <div class="skf-num">03</div>
+          <div class="skf-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="skf-name">MOBILE / FLUTTER</div>
+          <div class="skf-bar-wrap">
+            <div class="skf-bar"><div class="skf-fill" data-pct="85"></div></div>
+            <span class="skf-pct">85%</span>
+          </div>
+          <div class="skf-tags">
+            <span>Flutter</span><span>Firebase</span><span>Riverpod</span><span>Dart</span>
+          </div>
+          <div class="sk-scan"></div>
+          <div class="sk-corner sk-tl"></div>
+          <div class="sk-corner sk-br"></div>
+        </div>
+        <div class="sk-hologram">
+          <div class="skh-text">CROSS-PLATFORM<br>FIREBASE AUTH<br>RIVERPOD STATE<br>OFFLINE AI<br>WHATSAPP CLONE<br>GROQ INTEGRATION</div>
+        </div>
       </div>
+      <div class="sk-glow-ring"></div>
     </div>
+
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="s" data-section="projects">
-  <div class="s-header">
-    <div class="s-lbl rv">02 — Work</div>
-    <h2 class="s-h rv" data-d="1">Selected <span class="s-ghost">Projects</span></h2>
-  </div>
-  <div class="proj-list">
-    <div class="proj-row rv">
-      <div class="proj-n">01</div>
-      <div class="proj-info">
-        <div class="proj-title">JARVIS 2.0</div>
-        <div class="proj-cat">AI Assistant · Flask · Groq</div>
-      </div>
-      <div class="proj-btns">
-        <a class="proj-btn" href="https://github.com/SkFahimuddin/assist" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a class="proj-btn" href="https://jarvis-nu-brown.vercel.app/" target="_blank" title="Live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      </div>
+<section id="projects" class="section">
+  <div class="sec-label rv">02 // MISSION_LOG</div>
+  <h2 class="sec-title rv" data-d="1">SELECTED<br><span class="st-outline">OPERATIONS</span></h2>
+  <div class="proj-terminal">
+    <div class="pt-header">
+      <div class="pt-dots"><span></span><span></span><span></span></div>
+      <div class="pt-title">FAHIM_INDUSTRIES — PROJECT_DATABASE.exe</div>
+      <div class="pt-status">● LIVE</div>
     </div>
-    <div class="proj-row rv" data-d="1">
-      <div class="proj-n">02</div>
-      <div class="proj-info">
-        <div class="proj-title">FRIDAY</div>
-        <div class="proj-cat">Flutter AI · Offline · Phase 4</div>
+    <div class="pt-body">
+
+      <div class="proj-entry rv" data-d="1">
+        <div class="pe-index">01</div>
+        <div class="pe-content">
+          <div class="pe-name" data-text="JARVIS 2.0">JARVIS 2.0</div>
+          <div class="pe-meta">
+            <span class="pe-tag">AI ASSISTANT</span>
+            <span class="pe-tag">FLASK</span>
+            <span class="pe-tag">GROQ</span>
+            <span class="pe-tag pe-live">LIVE</span>
+          </div>
+          <div class="pe-desc">Memory-injected AI assistant with persistent goals, habits, HUD-style frontend & mouse-tracking eyes</div>
+        </div>
+        <div class="pe-links">
+          <a href="https://github.com/SkFahimuddin/assist" target="_blank" class="pe-link"><i class="fa-brands fa-github"></i></a>
+          <a href="https://jarvis-nu-brown.vercel.app/" target="_blank" class="pe-link pe-link-live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+        <div class="pe-scan-line"></div>
       </div>
-      <div class="proj-btns">
-        <a class="proj-btn" href="https://github.com/SkFahimuddin" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+
+      <div class="proj-entry rv" data-d="2">
+        <div class="pe-index">02</div>
+        <div class="pe-content">
+          <div class="pe-name" data-text="FRIDAY">FRIDAY</div>
+          <div class="pe-meta">
+            <span class="pe-tag">FLUTTER AI</span>
+            <span class="pe-tag">OFFLINE</span>
+            <span class="pe-tag">GROQ API</span>
+            <span class="pe-tag pe-wip">IN PROGRESS</span>
+          </div>
+          <div class="pe-desc">Personal AI assistant app — JARVIS-style animated UI, deep memory injection, 16-phase roadmap</div>
+        </div>
+        <div class="pe-links">
+          <a href="https://github.com/SkFahimuddin" target="_blank" class="pe-link"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <div class="pe-scan-line"></div>
       </div>
-    </div>
-    <div class="proj-row rv" data-d="2">
-      <div class="proj-n">03</div>
-      <div class="proj-info">
-        <div class="proj-title">SETTLEIT</div>
-        <div class="proj-cat">Real-time AI · React · Socket.io</div>
+
+      <div class="proj-entry rv" data-d="3">
+        <div class="pe-index">03</div>
+        <div class="pe-content">
+          <div class="pe-name" data-text="SETTLEIT">SETTLEIT</div>
+          <div class="pe-meta">
+            <span class="pe-tag">REAL-TIME AI</span>
+            <span class="pe-tag">REACT</span>
+            <span class="pe-tag">SOCKET.IO</span>
+          </div>
+          <div class="pe-desc">Real-time AI argument decider — multi-user rooms, live streaming AI verdict, deployed on Render</div>
+        </div>
+        <div class="pe-links">
+          <a href="https://github.com/SkFahimuddin" target="_blank" class="pe-link"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <div class="pe-scan-line"></div>
       </div>
-      <div class="proj-btns">
-        <a class="proj-btn" href="https://github.com/SkFahimuddin" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+
+      <div class="proj-entry rv" data-d="1">
+        <div class="pe-index">04</div>
+        <div class="pe-content">
+          <div class="pe-name" data-text="PAGEPALETTE">PAGEPALETTE</div>
+          <div class="pe-meta">
+            <span class="pe-tag">BOOK DISCOVERY</span>
+            <span class="pe-tag">WEB APP</span>
+            <span class="pe-tag pe-live">LIVE</span>
+          </div>
+          <div class="pe-desc">Book discovery platform with curated recommendations and elegant reading interface</div>
+        </div>
+        <div class="pe-links">
+          <a href="https://github.com/SkFahimuddin/PagePalette" target="_blank" class="pe-link"><i class="fa-brands fa-github"></i></a>
+          <a href="https://page-palette-ruddy.vercel.app" target="_blank" class="pe-link pe-link-live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+        <div class="pe-scan-line"></div>
       </div>
-    </div>
-    <div class="proj-row rv" data-d="1">
-      <div class="proj-n">04</div>
-      <div class="proj-info">
-        <div class="proj-title">PAGEPALETTE</div>
-        <div class="proj-cat">Book Discovery · Web</div>
+
+      <div class="proj-entry rv" data-d="2">
+        <div class="pe-index">05</div>
+        <div class="pe-content">
+          <div class="pe-name" data-text="FITTECH">FITTECH</div>
+          <div class="pe-meta">
+            <span class="pe-tag">FITNESS APP</span>
+            <span class="pe-tag">WEB</span>
+            <span class="pe-tag pe-live">LIVE</span>
+          </div>
+          <div class="pe-desc">Fitness tracking web application with workout management and progress visualization</div>
+        </div>
+        <div class="pe-links">
+          <a href="https://github.com/SkFahimuddin/fittech" target="_blank" class="pe-link"><i class="fa-brands fa-github"></i></a>
+          <a href="https://fittech.vercel.app/" target="_blank" class="pe-link pe-link-live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+        <div class="pe-scan-line"></div>
       </div>
-      <div class="proj-btns">
-        <a class="proj-btn" href="https://github.com/SkFahimuddin/PagePalette" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a class="proj-btn" href="https://page-palette-ruddy.vercel.app" target="_blank" title="Live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+
+      <div class="proj-entry rv" data-d="3">
+        <div class="pe-index">06</div>
+        <div class="pe-content">
+          <div class="pe-name" data-text="OTTO ROBOT">OTTO ROBOT</div>
+          <div class="pe-meta">
+            <span class="pe-tag">ARDUINO</span>
+            <span class="pe-tag">IoT</span>
+            <span class="pe-tag">ROBOTICS</span>
+          </div>
+          <div class="pe-desc">Bipedal Arduino robot — custom firmware, sensor integration, autonomous movement patterns</div>
+        </div>
+        <div class="pe-links">
+          <a href="https://github.com/SkFahimuddin" target="_blank" class="pe-link"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <div class="pe-scan-line"></div>
       </div>
-    </div>
-    <div class="proj-row rv" data-d="2">
-      <div class="proj-n">05</div>
-      <div class="proj-info">
-        <div class="proj-title">FITTECH</div>
-        <div class="proj-cat">Fitness App · Web</div>
-      </div>
-      <div class="proj-btns">
-        <a class="proj-btn" href="https://github.com/SkFahimuddin/fittech" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a class="proj-btn" href="https://fittech.vercel.app/" target="_blank" title="Live"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      </div>
-    </div>
-    <div class="proj-row rv" data-d="3">
-      <div class="proj-n">06</div>
-      <div class="proj-info">
-        <div class="proj-title">OTTO ROBOT</div>
-        <div class="proj-cat">Arduino · IoT · Robotics</div>
-      </div>
-      <div class="proj-btns">
-        <a class="proj-btn" href="https://github.com/SkFahimuddin" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="s" data-section="about">
-  <div class="s-header">
-    <div class="s-lbl rv">03 — About</div>
-  </div>
-  <div class="about-g">
-    <div class="about-img-wrap rv-l">
-      <div class="about-img-frame">
-        <div class="about-img" style="background-image:url('about.png')"></div>
-        <div class="about-img-scan"></div>
-        <div class="about-corner about-corner-tl"></div>
-        <div class="about-corner about-corner-br"></div>
-        <div class="about-badge">
-          <span class="ab-pulse"></span>
-          <span>Available</span>
+<section id="about" class="section">
+  <div class="sec-label rv">03 // IDENTITY_SCAN</div>
+  <div class="about-grid">
+    <div class="about-visual rv-l">
+      <div class="av-frame">
+        <div class="av-img" style="background-image:url('about.png')"></div>
+        <div class="av-overlay"></div>
+        <div class="av-scanline"></div>
+        <div class="av-grid-overlay"></div>
+        <div class="av-corner av-tl"></div>
+        <div class="av-corner av-tr"></div>
+        <div class="av-corner av-bl"></div>
+        <div class="av-corner av-br"></div>
+        <div class="av-label-top">SUBJECT_SCAN_ACTIVE</div>
+        <div class="av-label-bot">ID: SKF-001 // CLEARANCE: FULL</div>
+        <div class="av-badge">
+          <span class="avb-dot"></span>
+          <span>AVAILABLE FOR HIRE</span>
+        </div>
+      </div>
+      <div class="av-stats-row">
+        <div class="avs-item">
+          <div class="avs-val" data-count="6">0</div>
+          <div class="avs-lbl">PROJECTS</div>
+        </div>
+        <div class="avs-item">
+          <div class="avs-val" data-count="10">0</div>
+          <div class="avs-lbl">TECH STACK</div>
+        </div>
+        <div class="avs-item">
+          <div class="avs-val" data-count="20">0</div>
+          <div class="avs-lbl">AGE</div>
         </div>
       </div>
     </div>
-    <div class="a-txt rv-r">
-      <div class="a-tag">// B.Tech CS+AI · Techno India University</div>
-      <h2 class="a-h">I Build<br><em>Real Things</em></h2>
-      <p>I'm SK Fahimuddin, a 20-year-old college student and developer deeply passionate about building tech that actually works. B.Tech in CS & AI at Techno India University.</p>
-      <p>Computers have always been my driving force — I've shipped full-stack apps, AI assistants with persistent memory, Flutter mobile apps, and even a walking Arduino robot. I enjoy activities that challenge my mind: chess teaches me informed decisions; coding teaches me to learn from mistakes.</p>
-      <p>Beyond tech, I'm into stand-up comedy, gaming, and music. My goal is to work on impactful projects and collaborate with like-minded builders.</p>
-      <div class="a-stats">
-        <div class="a-stat">
-          <div class="a-sn" data-count="6">0</div>
-          <div class="a-sl">Projects</div>
-        </div>
-        <div class="a-stat">
-          <div class="a-sn" data-count="10">0</div>
-          <div class="a-sl">Tech Stack</div>
-        </div>
-        <div class="a-stat">
-          <div class="a-sn" data-count="20">0</div>
-          <div class="a-sl">Age</div>
-        </div>
+    <div class="about-text rv-r">
+      <div class="at-tag">// B.TECH CS+AI · TECHNO INDIA UNIVERSITY</div>
+      <h2 class="at-h">I BUILD<br><em>REAL THINGS</em></h2>
+      <div class="at-body">
+        <p>I'm SK Fahimuddin — 20-year-old builder deeply wired into making tech that <em>actually</em> works. Pursuing B.Tech in CS & AI at Techno India University, West Bengal.</p>
+        <p>I've shipped full-stack apps, AI assistants with persistent memory, Flutter mobile apps, and a walking Arduino robot. Chess taught me strategic thinking; coding taught me to learn from failures.</p>
+        <p>Beyond code: stand-up comedy, gaming, music. My operating directive — build impactful systems and collaborate with elite builders.</p>
+      </div>
+      <div class="at-stack-label">CURRENT STACK MATRIX</div>
+      <div class="at-stack">
+        <span>Flutter</span><span>React</span><span>Node.js</span>
+        <span>Flask</span><span>Firebase</span><span>MongoDB</span>
+        <span>Python</span><span>Groq API</span><span>Three.js</span><span>Arduino</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="s" data-section="contact">
-  <div class="s-header">
-    <div class="s-lbl rv">04 — Contact</div>
-  </div>
-  <div class="c-wrap">
-    <div class="c-left rv-l">
-      <h2 class="c-h">LET'S<br><em>TALK</em></h2>
-      <div class="c-items">
-        <div class="c-item">
-          <div class="c-ico"><i class="fa-solid fa-envelope"></i></div>
-          <span>skfahimuddin@gmail.com</span>
+<section id="contact" class="section">
+  <div class="sec-label rv">04 // OPEN_CHANNEL</div>
+  <div class="contact-grid">
+    <div class="contact-left rv-l">
+      <h2 class="ct-h">LET'S<br><em>CONNECT</em></h2>
+      <div class="ct-info">
+        <div class="ct-item">
+          <div class="ct-ico"><i class="fa-solid fa-envelope"></i></div>
+          <div class="ct-detail">
+            <div class="ct-lbl">EMAIL LINK</div>
+            <div class="ct-val">skfahimuddin@gmail.com</div>
+          </div>
         </div>
-        <div class="c-item">
-          <div class="c-ico"><i class="fa-solid fa-location-dot"></i></div>
-          <span>West Bengal, India</span>
+        <div class="ct-item">
+          <div class="ct-ico"><i class="fa-solid fa-location-crosshairs"></i></div>
+          <div class="ct-detail">
+            <div class="ct-lbl">COORDINATES</div>
+            <div class="ct-val">West Bengal, India</div>
+          </div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-ico"><i class="fa-solid fa-circle-dot"></i></div>
+          <div class="ct-detail">
+            <div class="ct-lbl">STATUS</div>
+            <div class="ct-val ct-online"><span class="ct-pulse"></span>OPEN TO OPPORTUNITIES</div>
+          </div>
         </div>
       </div>
-      <div class="c-socs">
-        <a class="c-soc" href="https://www.linkedin.com/in/sk-fahim-532004312/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a class="c-soc" href="https://github.com/SkFahimuddin" target="_blank"><i class="fa-brands fa-github"></i></a>
-        <a class="c-soc" href="https://x.com/skf4988" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-        <a class="c-soc" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <div class="ct-socs">
+        <a href="https://www.linkedin.com/in/sk-fahim-532004312/" target="_blank" class="ct-soc">
+          <i class="fa-brands fa-linkedin-in"></i>
+          <span>LINKEDIN</span>
+        </a>
+        <a href="https://github.com/SkFahimuddin" target="_blank" class="ct-soc">
+          <i class="fa-brands fa-github"></i>
+          <span>GITHUB</span>
+        </a>
+        <a href="https://x.com/skf4988" target="_blank" class="ct-soc">
+          <i class="fa-brands fa-x-twitter"></i>
+          <span>TWITTER</span>
+        </a>
       </div>
     </div>
-    <div class="c-form-wrap rv-r">
-      <form class="cform" id="cform" novalidate>
-        <div class="cf-row">
-          <div class="cf-f">
-            <label>First Name</label>
-            <input type="text" id="fn" required placeholder="Fahim"/>
-            <div class="cf-line"></div>
-          </div>
-          <div class="cf-f">
-            <label>Last Name</label>
-            <input type="text" id="ln" required placeholder="Uddin"/>
-            <div class="cf-line"></div>
-          </div>
+    <div class="contact-form-wrap rv-r">
+      <div class="form-terminal">
+        <div class="ft-header">
+          <span class="ft-prompt">▶ COMPOSE_MESSAGE.exe</span>
+          <span class="ft-blink">█</span>
         </div>
-        <div class="cf-row">
-          <div class="cf-f">
-            <label>Email</label>
-            <input type="email" id="em" required placeholder="hello@domain.com"/>
-            <div class="cf-line"></div>
+        <form id="cform" novalidate>
+          <div class="ft-row">
+            <div class="ft-field">
+              <label>FIRST_NAME</label>
+              <input type="text" id="fn" required placeholder="Fahim"/>
+            </div>
+            <div class="ft-field">
+              <label>LAST_NAME</label>
+              <input type="text" id="ln" required placeholder="Uddin"/>
+            </div>
           </div>
-          <div class="cf-f">
-            <label>Phone (optional)</label>
-            <input type="text" id="ph" placeholder="+91 ..."/>
-            <div class="cf-line"></div>
+          <div class="ft-row">
+            <div class="ft-field">
+              <label>EMAIL_ADDRESS</label>
+              <input type="email" id="em" required placeholder="hello@domain.com"/>
+            </div>
+            <div class="ft-field">
+              <label>PHONE [OPTIONAL]</label>
+              <input type="text" id="ph" placeholder="+91 ..."/>
+            </div>
           </div>
-        </div>
-        <div class="cf-f">
-          <label>Message</label>
-          <textarea id="msg" required placeholder="Let's build something together..."></textarea>
-          <div class="cf-line"></div>
-        </div>
-        <div class="cf-submit-row">
-          <button class="mbtn" type="submit">
-            <span class="mbtn-bg"></span>
-            <span class="mbtn-txt">Send Message</span>
-            <i class="fa-solid fa-paper-plane mbtn-ico"></i>
-          </button>
-          <div id="fst"></div>
-        </div>
-      </form>
+          <div class="ft-field">
+            <label>MESSAGE_BODY</label>
+            <textarea id="msg" required placeholder="▶ INPUT TRANSMISSION..."></textarea>
+          </div>
+          <div class="ft-submit-row">
+            <button type="submit" class="transmit-btn">
+              <span class="tb-bg"></span>
+              <span class="tb-txt">TRANSMIT</span>
+              <i class="fa-solid fa-satellite-dish tb-ico"></i>
+            </button>
+            <div id="fst"></div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo">SK<span>.</span></div>
-  <span class="f-copy">©2026 Sk Fahimuddin</span>
-  <span class="f-brand">Fahim MindWorks</span>
+  <div class="f-left">
+    <div class="f-logo"><span>[</span>SK<span class="fc">.</span>F<span>]</span></div>
+    <div class="f-copy">©2026 SK FAHIMUDDIN — ALL SYSTEMS NOMINAL</div>
+  </div>
+  <div class="f-right">
+    <span class="f-brand">FAHIM_INDUSTRIES</span>
+    <span class="f-ver">v4.2.1</span>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
