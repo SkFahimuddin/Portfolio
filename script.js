@@ -1,11 +1,11 @@
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    EMAILJS INIT
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 (function(){ emailjs.init("t5V8Jgt0na69vaVW7"); })();
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    BOOT SEQUENCE
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 (function(){
   const boot = document.getElementById('boot');
   const lines = document.querySelectorAll('.boot-line');
@@ -23,9 +23,43 @@
   setTimeout(() => boot.classList.add('done'), 2900);
 })();
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
+   MOBILE NAV (HAMBURGER)
+═══════════════════════════════════════════ */
+const hamburger    = document.getElementById('hamburger');
+const mobNav       = document.getElementById('mob-nav');
+const mobOverlay   = document.getElementById('mob-nav-overlay');
+const mobNavClose  = document.getElementById('mob-nav-close');
+
+function openMobNav() {
+  hamburger.classList.add('open');
+  mobNav.classList.add('open');
+  mobOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobNav() {
+  hamburger.classList.remove('open');
+  mobNav.classList.remove('open');
+  mobOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  if (mobNav.classList.contains('open')) closeMobNav();
+  else openMobNav();
+});
+
+mobNavClose.addEventListener('click', closeMobNav);
+mobOverlay.addEventListener('click', closeMobNav);
+
+// Close on nav link click (links already have onclick="closeMobNav()")
+// Expose closeMobNav globally for the inline onclick attributes
+window.closeMobNav = closeMobNav;
+
+/* ═══════════════════════════════════════════
    CURSOR
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 const cdot  = document.getElementById('c-dot');
 const cring = document.getElementById('c-ring');
 const ctrail= document.getElementById('c-trail');
@@ -42,9 +76,9 @@ document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
   requestAnimationFrame(cursorLoop);
 })();
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    NAV SCROLL
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 const nav  = document.getElementById('nav');
 const npFill = document.getElementById('np-fill');
 window.addEventListener('scroll', () => {
@@ -54,9 +88,9 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('solid', s > 50);
 });
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    DATA STREAM (hero sidebar)
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 (function(){
   const el = document.getElementById('datastream');
   if (!el) return;
@@ -81,9 +115,9 @@ window.addEventListener('scroll', () => {
   next();
 })();
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    WARP TUNNEL (Three.js)
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 (function(){
   const canvas = document.getElementById('warp-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
@@ -94,15 +128,14 @@ window.addEventListener('scroll', () => {
   const cam = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, .1, 200);
   cam.position.z = 0;
 
-  // Warp tunnel particles
   const count = 1200;
   const positions = new Float32Array(count*3);
   const speeds    = new Float32Array(count);
   const colors    = new Float32Array(count*3);
   const baseColors = [
-    [0, 0.96, 1],   // cyan
-    [0.47, 0, 1],   // violet
-    [1, 0, 0.24],   // red
+    [0, 0.96, 1],
+    [0.47, 0, 1],
+    [1, 0, 0.24],
   ];
 
   for(let i=0; i<count; i++){
@@ -112,7 +145,6 @@ window.addEventListener('scroll', () => {
     positions[i*3+1] = Math.sin(angle)*radius + (Math.random()-.5)*1.5;
     positions[i*3+2] = (Math.random()-0.5)*120;
     speeds[i] = .2 + Math.random()*.5;
-
     const c = baseColors[Math.floor(Math.random()*baseColors.length)];
     colors[i*3]   = c[0];
     colors[i*3+1] = c[1];
@@ -133,7 +165,6 @@ window.addEventListener('scroll', () => {
   const pts = new THREE.Points(geo, mat);
   scene.add(pts);
 
-  // Grid rings
   for(let r=0; r<8; r++){
     const geo2 = new THREE.TorusGeometry(3+r*.8, .005, 4, 60);
     const m2 = new THREE.Mesh(geo2, new THREE.MeshBasicMaterial({
@@ -144,7 +175,6 @@ window.addEventListener('scroll', () => {
     scene.add(m2);
   }
 
-  // Floating geometry
   const addFloat = (geo, col, x, y, z) => {
     const m = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
       color:col, wireframe:true, transparent:true, opacity:.05
@@ -165,16 +195,14 @@ window.addEventListener('scroll', () => {
     lastScroll = window.scrollY;
   });
 
-  let tmx=0, tmy=0, t=0;
+  let tmx=0, tmy=0;
   document.addEventListener('mousemove', e=>{
     tmx = (e.clientX/innerWidth-.5)*2;
     tmy = -(e.clientY/innerHeight-.5)*1.5;
   });
 
   function tick(){
-    t += .004;
     scrollSpeed *= .92;
-
     const warpSpeed = .04 + Math.abs(scrollSpeed);
     const pos = geo.attributes.position.array;
 
@@ -189,8 +217,6 @@ window.addEventListener('scroll', () => {
       }
     }
     geo.attributes.position.needsUpdate = true;
-
-    // Stretch particles during fast scroll
     mat.size = .06 + Math.abs(scrollSpeed)*0.08;
 
     geo3.rotation.x += .003; geo3.rotation.y += .007;
@@ -213,9 +239,9 @@ window.addEventListener('scroll', () => {
   });
 })();
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    TYPEWRITER
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 const roles = ['FLUTTER ENGINEER', 'AI BUILDER', 'FULL-STACK DEV', 'PROBLEM SOLVER'];
 let ri=0,ci=0,del=false,td=100;
 const typedEl = document.getElementById('typed');
@@ -229,17 +255,17 @@ function type(){
 }
 type();
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    SCROLL REVEAL
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 const rvObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); rvObs.unobserve(e.target); } });
 },{threshold:.1});
 document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rvObs.observe(el));
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    SKILL BAR ANIMATE
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 const barObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -252,9 +278,9 @@ const barObs = new IntersectionObserver(entries=>{
 },{threshold:.3});
 document.querySelectorAll('.sk-holo').forEach(el=>barObs.observe(el));
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    COUNT UP
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 document.querySelectorAll('[data-count]').forEach(el=>{
   const n = parseInt(el.getAttribute('data-count'));
   const obs = new IntersectionObserver(([e])=>{
@@ -267,9 +293,9 @@ document.querySelectorAll('[data-count]').forEach(el=>{
   obs.observe(el);
 });
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    CONTACT FORM
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 document.getElementById('cform').addEventListener('submit', function(e){
   e.preventDefault();
   const st = document.getElementById('fst');
@@ -293,9 +319,9 @@ document.getElementById('cform').addEventListener('submit', function(e){
   });
 });
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    HOLOGRAPHIC CARD TILT
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 document.querySelectorAll('.sk-holo').forEach(card=>{
   card.addEventListener('mousemove', e=>{
     const r = card.getBoundingClientRect();
@@ -313,9 +339,9 @@ document.querySelectorAll('.sk-holo').forEach(card=>{
   });
 });
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════════════════════
    GLITCH INTERVAL (random)
-═══════════════════════════════════ */
+═══════════════════════════════════════════ */
 (function(){
   function doGlitch(){
     document.querySelectorAll('.hn-glitch').forEach(el=>{

@@ -40,6 +40,32 @@
 <!-- THREE.JS WARP CANVAS -->
 <canvas id="warp-canvas"></canvas>
 
+<!-- MOBILE NAV OVERLAY -->
+<div id="mob-nav-overlay"></div>
+<div id="mob-nav">
+  <div class="mn-header">
+    <div class="mn-logo"><span>[</span>SK<span class="mnc">.</span>F<span>]</span></div>
+    <button id="mob-nav-close" aria-label="Close menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <ul class="mn-links">
+    <li><a href="#hero"     data-label="00" onclick="closeMobNav()"><span class="mn-num">00</span>HOME</a></li>
+    <li><a href="#skills"   data-label="01" onclick="closeMobNav()"><span class="mn-num">01</span>SKILLS</a></li>
+    <li><a href="#projects" data-label="02" onclick="closeMobNav()"><span class="mn-num">02</span>PROJECTS</a></li>
+    <li><a href="#about"    data-label="03" onclick="closeMobNav()"><span class="mn-num">03</span>ABOUT</a></li>
+    <li><a href="#contact"  data-label="04" onclick="closeMobNav()"><span class="mn-num">04</span>CONTACT</a></li>
+  </ul>
+  <div class="mn-footer">
+    <div class="mn-socs">
+      <a href="https://www.linkedin.com/in/sk-fahim-532004312/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/SkFahimuddin" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://x.com/skf4988" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
+    <div class="mn-sig">FAHIM_INDUSTRIES_©2026</div>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
@@ -61,6 +87,12 @@
       <li><a href="#contact" data-label="04">CONTACT</a></li>
     </ul>
     <div class="nav-sig">FAHIM_INDUSTRIES_©2026</div>
+    <!-- HAMBURGER -->
+    <button id="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
   <div class="nav-progress"><div id="np-fill"></div></div>
 </nav>
